@@ -5,7 +5,7 @@ const contracts = {
       name: "baseGoerli",
       contracts: {
         ReputationServiceMachine: {
-          address: "0x324C225016E3d11D76119C3895636bdfCa1D20f0",
+          address: "0xCbf8E57e8834c1995a762C31Dd2e6CcB4D010F34",
           abi: [
             {
               inputs: [],
@@ -296,6 +296,25 @@ const contracts = {
                   internalType: "bytes32",
                   name: "commentHash",
                   type: "bytes32",
+                },
+              ],
+              stateMutability: "view",
+              type: "function",
+            },
+            {
+              inputs: [
+                {
+                  internalType: "address",
+                  name: "user",
+                  type: "address",
+                },
+              ],
+              name: "getTotalScore",
+              outputs: [
+                {
+                  internalType: "int256",
+                  name: "",
+                  type: "int256",
                 },
               ],
               stateMutability: "view",

@@ -289,4 +289,10 @@ contract ReputationServiceMachine is Ownable, ReentrancyGuard {
     function getAddressesReceivedReputationFrom(address user) public view returns (address[] memory) {
         return receivedReputation[user].values();
     }
+
+
+    // Function to get the total score for a specific address
+    function getTotalScore(address user) public view returns (int) {
+        return totalScore[user];
+    }
 }
