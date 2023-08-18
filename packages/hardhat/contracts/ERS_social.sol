@@ -7,7 +7,7 @@ import "@openzeppelin/contracts/utils/structs/EnumerableSet.sol";
 import "@openzeppelin/contracts/security/ReentrancyGuard.sol";
 
 
-error ERS_SOCIAL__REPUTATION_MAX_MUST_GREATER_ZERO();
+error ERS_SOCIAL__SCORE_MAX_MUST_GREATER_ZERO();
 error ERS_SOCIAL__OWNER_EQUITY_CANNOT_EXCEED_100();
 error ERS_SOCIAL__COMMENT_LENGTH_TOO_LONG();
 error ERS_SOCIAL__INSUFFICIENT_FUNDS();
@@ -25,30 +25,30 @@ contract ReputationServiceMachine is Ownable, ReentrancyGuard {
     mapping(address => EnumerableSet.AddressSet) private receivedReputation;
 
     struct ReputationData {
-        uint128 packedReputationAndTimestamp; // 64 bits for reputation, 64 bits for timestamp
+        uint128 packedScoreAndTimestamp; // 64 bits for score, 64 bits for timestamp
         bytes32 tag; // 256 bits for a 32-character ASCII tag
         bytes32 commentHash;
     }
 
     struct ReputationBatch {
         address receiver;
-        int reputation;
+        int score;
         string tag;
         string comment;
     }
 
     mapping(address => mapping(address => ReputationData)) public reputationData; // Nested mapping for reputation data
-    mapping(address => int) public totalReputation;
+    mapping(address => int) public totalScore;
 
     uint public reputationFee;
     uint public operatorEquity;
     uint public operatorRevenue;
     uint public maxCommentBytes;
-    int public maxReputation;
+    int public maxScore;
 
-    event ReputationSet(address indexed sender, address indexed receiver, int reputation, string tag, string comment, uint timestamp);
+    event ReputationSet(address indexed sender, address indexed receiver, int score, string tag, string comment, uint timestamp);
     event ReputationFeeSet(uint newPrice);
-    event MaxReputationSet(int newMaxReputation);
+    event MaxScoreSet(int newMaxScore);
     event OperatorRevenueWithdrawn(uint amount);
     event OperatorEquitySet(uint newOperatorEquity);
     event MaxCommentBytesSet(uint newMaxCommentBytes);
@@ -61,7 +61,7 @@ contract ReputationServiceMachine is Ownable, ReentrancyGuard {
         operatorEquity = 100;
         operatorRevenue = 0;
         maxCommentBytes = 320;
-        maxReputation = 2;
+        maxScore = 2;
 
         // Set the deployer as the initial owner
         transferOwnership(msg.sender);
@@ -74,13 +74,13 @@ contract ReputationServiceMachine is Ownable, ReentrancyGuard {
         emit ReputationFeeSet(_reputationFee);
     }
 
-    // Function to set the maximum reputation value
-    function setMaxReputation(int _maxReputation) public onlyOwner {
-        if (_maxReputation <= 0) {
-            revert ERS_SOCIAL__REPUTATION_MAX_MUST_GREATER_ZERO();
+    // Function to set the maximum score value
+    function setMaxScore(int _maxScore) public onlyOwner {
+        if (_maxScore <= 0) {
+            revert ERS_SOCIAL__SCORE_MAX_MUST_GREATER_ZERO();
         }
-        maxReputation = _maxReputation;
-        emit MaxReputationSet(_maxReputation);
+        maxScore = _maxScore;
+        emit MaxScoreSet(_maxScore);
     }
 
 
@@ -102,13 +102,13 @@ contract ReputationServiceMachine is Ownable, ReentrancyGuard {
 
 
     // Function to set single reputation
-    function setReputation(address receiver, int reputation, string memory tag, string memory comment) public payable nonReentrant {
+    function setReputation(address receiver, int score, string memory tag, string memory comment) public payable nonReentrant {
         if (msg.value < reputationFee) {
             revert ERS_SOCIAL__INSUFFICIENT_FUNDS();
         }
 
         // Call the internal function to set the reputation
-        setReputationInternal(receiver, reputation, tag, comment, maxReputation);
+        setReputationInternal(receiver, score, tag, comment, maxScore);
 
         // Refund any excess funds sent
         if (msg.value > reputationFee) {
@@ -127,10 +127,10 @@ contract ReputationServiceMachine is Ownable, ReentrancyGuard {
             // Call the internal function to set the reputation for each batch item
             setReputationInternal(
                 reputations[i].receiver,
-                reputations[i].reputation,
+                reputations[i].score,
                 reputations[i].tag,
                 reputations[i].comment,
-                maxReputation
+                maxScore
             );
         }
 
@@ -142,7 +142,7 @@ contract ReputationServiceMachine is Ownable, ReentrancyGuard {
 
 
     // Internal function to handle setting reputation
-    function setReputationInternal(address receiver, int reputation, string memory tag, string memory comment, int currentMaxReputation) private {
+    function setReputationInternal(address receiver, int score, string memory tag, string memory comment, int currentMaxScore) private {
         if (bytes(tag).length > 32) {
             revert ERS_SOCIAL__TAG_LENGTH_TOO_LONG();
         }
@@ -150,10 +150,10 @@ contract ReputationServiceMachine is Ownable, ReentrancyGuard {
             revert ERS_SOCIAL__COMMENT_LENGTH_TOO_LONG();
         }
 
-        if (reputation > currentMaxReputation) {
-            reputation = currentMaxReputation;
-        } else if (reputation < -currentMaxReputation) {
-            reputation = -currentMaxReputation;
+        if (score > currentMaxScore) {
+            score = currentMaxScore;
+        } else if (score < -currentMaxScore) {
+            score = -currentMaxScore;
         }
 
         bytes32 tagBytes = bytes32(0); // Default value if tag is empty
@@ -183,36 +183,36 @@ contract ReputationServiceMachine is Ownable, ReentrancyGuard {
         operatorRevenue += contractRevenue;
 
         // If the sender has already given a reputation to the receiver, deduct it from the total
-        if (reputationData[msg.sender][receiver].packedReputationAndTimestamp != 0) {
-            int previousReputation = int64(uint64(reputationData[msg.sender][receiver].packedReputationAndTimestamp >> 64));
-            totalReputation[receiver] -= previousReputation;
+        if (reputationData[msg.sender][receiver].packedScoreAndTimestamp != 0) {
+            int previousScore = int64(uint64(reputationData[msg.sender][receiver].packedScoreAndTimestamp >> 64));
+            totalScore[receiver] -= previousScore;
         }
 
-        // Pack the reputation and timestamp together into the 128-bit field
-        uint128 packedReputationAndTimestamp = uint128(uint256(reputation)) << 64 | uint64(block.timestamp);
+        // Pack the score and timestamp together into the 128-bit field
+        uint128 packedScoreAndTimestamp = uint128(uint256(score)) << 64 | uint64(block.timestamp);
 
-        // Set the new packed reputation and timestamp data along with the comment hash
-        reputationData[msg.sender][receiver] = ReputationData(packedReputationAndTimestamp, tagBytes, commentHash);
+        // Set the new packed score and timestamp data along with the comment hash
+        reputationData[msg.sender][receiver] = ReputationData(packedScoreAndTimestamp, tagBytes, commentHash);
 
-        totalReputation[receiver] += reputation;
+        totalScore[receiver] += score;
 
         givenReputation[msg.sender].add(receiver);
         receivedReputation[receiver].add(msg.sender);
 
-        emit ReputationSet(msg.sender, receiver, reputation, tag, comment, block.timestamp);
+        emit ReputationSet(msg.sender, receiver, score, tag, comment, block.timestamp);
     }
 
 
     // Function to delete reputation
     function deleteReputation(address receiver) public {
-        if (reputationData[msg.sender][receiver].packedReputationAndTimestamp == 0) {
+        if (reputationData[msg.sender][receiver].packedScoreAndTimestamp == 0) {
             revert ERS_SOCIAL__REPUTATION_NOT_FOUND();
         }
 
         ReputationData storage data = reputationData[msg.sender][receiver];
-        int packedReputation = int64(uint64(data.packedReputationAndTimestamp >> 64));
+        int packedScore = int64(uint64(data.packedScoreAndTimestamp >> 64));
 
-        totalReputation[receiver] -= packedReputation;
+        totalScore[receiver] -= packedScore;
 
         delete reputationData[msg.sender][receiver];
 
@@ -232,12 +232,12 @@ contract ReputationServiceMachine is Ownable, ReentrancyGuard {
 
 
     // Function to get reputation data
-    function getReputationData(address sender, address receiver) public view returns (int reputation, uint timestamp, string memory tag, bytes32 commentHash) {
+    function getReputationData(address sender, address receiver) public view returns (int score, uint timestamp, string memory tag, bytes32 commentHash) {
         ReputationData storage data = reputationData[sender][receiver];
-        int packedReputation = int64(uint64(data.packedReputationAndTimestamp >> 64));
-        uint packedTimestamp = uint64(data.packedReputationAndTimestamp);
+        int packedScore = int64(uint64(data.packedScoreAndTimestamp >> 64));
+        uint packedTimestamp = uint64(data.packedScoreAndTimestamp);
         string memory tagString = bytes32ToString(data.tag);
-        return (packedReputation, packedTimestamp, tagString, data.commentHash);
+        return (packedScore, packedTimestamp, tagString, data.commentHash);
     }
 
 

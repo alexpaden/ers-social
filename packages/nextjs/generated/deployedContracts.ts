@@ -1,12 +1,11 @@
 const contracts = {
-
   84531: [
     {
       chainId: "84531",
       name: "baseGoerli",
       contracts: {
         ReputationServiceMachine: {
-          address: "0xa9efCa975A5111B10c1C8684215541d944b2Ba86",
+          address: "0x324C225016E3d11D76119C3895636bdfCa1D20f0",
           abi: [
             {
               inputs: [],
@@ -40,12 +39,12 @@ const contracts = {
             },
             {
               inputs: [],
-              name: "ERS_SOCIAL__REPUTATION_MAX_MUST_GREATER_ZERO",
+              name: "ERS_SOCIAL__REPUTATION_NOT_FOUND",
               type: "error",
             },
             {
               inputs: [],
-              name: "ERS_SOCIAL__REPUTATION_NOT_FOUND",
+              name: "ERS_SOCIAL__SCORE_MAX_MUST_GREATER_ZERO",
               type: "error",
             },
             {
@@ -72,11 +71,11 @@ const contracts = {
                 {
                   indexed: false,
                   internalType: "int256",
-                  name: "newMaxReputation",
+                  name: "newMaxScore",
                   type: "int256",
                 },
               ],
-              name: "MaxReputationSet",
+              name: "MaxScoreSet",
               type: "event",
             },
             {
@@ -174,7 +173,7 @@ const contracts = {
                 {
                   indexed: false,
                   internalType: "int256",
-                  name: "reputation",
+                  name: "score",
                   type: "int256",
                 },
                 {
@@ -280,7 +279,7 @@ const contracts = {
               outputs: [
                 {
                   internalType: "int256",
-                  name: "reputation",
+                  name: "score",
                   type: "int256",
                 },
                 {
@@ -346,7 +345,7 @@ const contracts = {
             },
             {
               inputs: [],
-              name: "maxReputation",
+              name: "maxScore",
               outputs: [
                 {
                   internalType: "int256",
@@ -420,7 +419,7 @@ const contracts = {
               outputs: [
                 {
                   internalType: "uint128",
-                  name: "packedReputationAndTimestamp",
+                  name: "packedScoreAndTimestamp",
                   type: "uint128",
                 },
                 {
@@ -467,11 +466,11 @@ const contracts = {
               inputs: [
                 {
                   internalType: "int256",
-                  name: "_maxReputation",
+                  name: "_maxScore",
                   type: "int256",
                 },
               ],
-              name: "setMaxReputation",
+              name: "setMaxScore",
               outputs: [],
               stateMutability: "nonpayable",
               type: "function",
@@ -498,7 +497,7 @@ const contracts = {
                 },
                 {
                   internalType: "int256",
-                  name: "reputation",
+                  name: "score",
                   type: "int256",
                 },
                 {
@@ -528,7 +527,7 @@ const contracts = {
                     },
                     {
                       internalType: "int256",
-                      name: "reputation",
+                      name: "score",
                       type: "int256",
                     },
                     {
@@ -574,7 +573,7 @@ const contracts = {
                   type: "address",
                 },
               ],
-              name: "totalReputation",
+              name: "totalScore",
               outputs: [
                 {
                   internalType: "int256",
