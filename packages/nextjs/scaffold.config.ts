@@ -1,5 +1,41 @@
 import * as chains from "wagmi/chains";
 
+// Base chain
+export const base = {
+  id: 84531,
+  network: "Base Goerli",
+  name: "Base Goerli",
+  nativeCurrency: { name: "Base", symbol: "ETH", decimals: 18 },
+  rpcUrls: {
+    default: {
+      http: ["https://goerli.base.org"],
+    },
+    public: {
+      http: ["https://goerli.base.org"],
+    },
+  },
+  blockExplorers: {
+    blockscout: {
+      name: "Basescout",
+      url: "https://base-goerli.blockscout.com",
+    },
+    default: {
+      name: "Basescan",
+      url: "https://goerli.basescan.org",
+    },
+    etherscan: {
+      name: "Basescan",
+      url: "https://goerli.basescan.org",
+    },
+  },
+  contracts: {
+    multicall3: {
+      address: "0xa9efCa975A5111B10c1C8684215541d944b2Ba86",
+      blockCreated: 5022,
+    },
+  },
+} as const satisfies chains.Chain;
+
 export type ScaffoldConfig = {
   targetNetwork: chains.Chain;
   pollingInterval: number;
@@ -11,11 +47,13 @@ export type ScaffoldConfig = {
 
 const scaffoldConfig = {
   // The network where your DApp lives in
-  targetNetwork: chains.hardhat,
+  //targetNetwork: base,
+  // for base goerli testnet :
+   targetNetwork : chains.baseGoerli,
 
   // The interval at which your front-end polls the RPC servers for new data
   // it has no effect on the local network
-  pollingInterval: 30000,
+  pollingInterval: 5000,
 
   // This is ours Alchemy's default API key.
   // You can get your own at https://dashboard.alchemyapi.io

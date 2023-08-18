@@ -46,6 +46,14 @@ const config: HardhatUserConfig = {
       url: `https://eth-mainnet.alchemyapi.io/v2/${providerApiKey}`,
       accounts: [deployerPrivateKey],
     },
+    base : {
+      url: "https://mainnet.base.org",
+      accounts: [deployerPrivateKey]
+    },
+    baseGoerli : {
+      url: "https://goerli.base.org",
+      accounts: [deployerPrivateKey]
+    },
     sepolia: {
       url: `https://eth-sepolia.g.alchemy.com/v2/${providerApiKey}`,
       accounts: [deployerPrivateKey],
@@ -96,14 +104,6 @@ const config: HardhatUserConfig = {
     },
     chiado: {
       url: "https://rpc.chiadochain.net",
-      accounts: [deployerPrivateKey],
-    },
-    base: {
-      url: "https://mainnet.base.org",
-      accounts: [deployerPrivateKey],
-    },
-    baseGoerli: {
-      url: "https://goerli.base.org",
       accounts: [deployerPrivateKey],
     },
   },
