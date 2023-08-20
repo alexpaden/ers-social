@@ -5,7 +5,7 @@ const contracts = {
       name: "baseGoerli",
       contracts: {
         ReputationServiceMachine: {
-          address: "0xCbf8E57e8834c1995a762C31Dd2e6CcB4D010F34",
+          address: "0x6e25efA193bB25319216b1b28276159e1ef0FAbD",
           abi: [
             {
               inputs: [],
