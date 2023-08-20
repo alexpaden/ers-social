@@ -1,30 +1,32 @@
 import { useState } from "react";
+import { AddressInput } from "../scaffold-eth/Input";
+import { CommentInput } from "./CommentInput";
+import { ScoreInput } from "./ScoreInput";
+import { TagInput } from "./TagInput";
+// Adjust the path as needed
 import { CopyIcon } from "./assets/CopyIcon";
 import { DiamondIcon } from "./assets/DiamondIcon";
 import { HareIcon } from "./assets/HareIcon";
-import { ArrowSmallRightIcon, XMarkIcon } from "@heroicons/react/24/outline";
+import { ArrowSmallRightIcon } from "@heroicons/react/24/outline";
 import { useScaffoldContractWrite } from "~~/hooks/scaffold-eth";
 
 export const ContractInteraction = () => {
-  const [visible, setVisible] = useState(true);
   const [receiver, setReceiver] = useState("");
-  const [score, setScore] = useState("");
+  const [score, setScore] = useState(0);
   const [tag, setTag] = useState("");
   const [comment, setComment] = useState("");
 
-  const scoreBigInt = score.startsWith('-') 
-  ? BigInt(score.substring(1)) * BigInt(-1) 
-  : BigInt(score);
+  const scoreBigInt = BigInt(score);
 
-const { writeAsync, isLoading } = useScaffoldContractWrite({
-  contractName: "ReputationServiceMachine",
-  functionName: "setReputation",
-  args: [receiver, scoreBigInt, tag, comment],
-  value: "0.01",
-  onBlockConfirmation: (txnReceipt) => {
-    console.log("📦 Transaction blockHash", txnReceipt.blockHash);
-  },
-});
+  const { writeAsync, isLoading } = useScaffoldContractWrite({
+    contractName: "ReputationServiceMachine",
+    functionName: "setReputation",
+    args: [receiver, scoreBigInt, tag, comment],
+    value: "0.01",
+    onBlockConfirmation: txnReceipt => {
+      console.log("📦 Transaction blockHash", txnReceipt.blockHash);
+    },
+  });
 
   return (
     <div className="flex bg-base-300 relative pb-10">
@@ -35,10 +37,10 @@ const { writeAsync, isLoading } = useScaffoldContractWrite({
         <div className="flex flex-col mt-6 px-7 py-8 bg-base-200 opacity-80 rounded-2xl shadow-lg border-2 border-primary">
           <span className="text-4xl sm:text-6xl text-black">Set Reputation_</span>
           <div className="mt-8 flex flex-col sm:flex-row items-start sm:items-center gap-2 sm:gap-5">
-            <input type="text" placeholder="Receiver Address" className="input" onChange={e => setReceiver(e.target.value)} />
-            <input type="text" placeholder="Score" className="input" onChange={e => setScore(e.target.value)} />
-            <input type="text" placeholder="Tag" className="input" onChange={e => setTag(e.target.value)} />
-            <input type="text" placeholder="Comment" className="input" onChange={e => setComment(e.target.value)} />
+            <AddressInput placeholder="Receiver Address" value={receiver} onChange={setReceiver} />
+            <ScoreInput placeholder="Score" value={score} onChange={setScore} />
+            <TagInput placeholder="Tag" value={tag} onChange={setTag} />
+            <CommentInput placeholder="Comment" value={comment} onChange={setComment} />
             <div className="flex rounded-full border border-primary p-1 flex-shrink-0">
               <div className="flex rounded-full border-2 border-primary p-1">
                 <button
