@@ -38,7 +38,7 @@ export const ContractInteraction = () => {
           <span className="text-4xl sm:text-6xl text-black">Set Reputation_</span>
           <div className="mt-8 flex flex-col sm:flex-row items-start sm:items-center gap-2 sm:gap-5">
             <AddressInput placeholder="Receiver Address" value={receiver} onChange={setReceiver} />
-            <ScoreInput placeholder="Score" value={score} onChange={setScore} />
+            <ScoreInput value={score} onChange={setScore} />
             <TagInput placeholder="Tag" value={tag} onChange={setTag} />
             <CommentInput placeholder="Comment" value={comment} onChange={setComment} />
             <div className="flex rounded-full border border-primary p-1 flex-shrink-0">
