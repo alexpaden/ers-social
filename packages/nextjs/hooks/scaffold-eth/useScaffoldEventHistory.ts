@@ -32,29 +32,24 @@ export const useScaffoldEventHistory = <
           throw new Error("Contract not found");
         }
 
-        console.log("Starting to read events...");
-
         const abiEvent = (deployedContractData.abi as Abi).find(
           part => part.type === "event" && part.name === eventName,
         ) as AbiEvent;
 
         const latestBlock = await publicClient.getBlockNumber();
-        console.log(`Latest block number: ${latestBlock}`);
-        let currentFromBlock = fromBlock || 8654330n;
+        let currentToBlock = latestBlock;
+        let currentFromBlock = Math.max(Number(latestBlock) - Number(batchSize) + 1, Number(fromBlock || 8654330n));
 
-        while (currentFromBlock <= latestBlock) {
-          const toBlock = BigInt(Math.min(Number(currentFromBlock) + Number(batchSize) - 1, Number(latestBlock)));
-          console.log(`Reading logs from block ${currentFromBlock} to ${toBlock}`);
-
+        while (currentToBlock >= (fromBlock || 8654330n)) {
+          console.log(`Reading logs from block ${currentFromBlock} to ${currentToBlock}`);
+        
           const logs = await publicClient.getLogs({
             address: deployedContractData?.address,
             event: abiEvent,
             args: filters as any,
-            fromBlock: currentFromBlock,
-            toBlock: toBlock,
+            fromBlock: BigInt(currentFromBlock), // Ensure fromBlock is a BigInt
+            toBlock: BigInt(currentToBlock),     // Ensure toBlock is a BigInt
           });
-
-          console.log(`Found ${logs.length} logs`);
 
           const newEvents = [];
           for (let i = logs.length - 1; i >= 0; i--) {
@@ -77,10 +72,10 @@ export const useScaffoldEventHistory = <
           }
 
           setEvents(prevEvents => [...prevEvents, ...newEvents]);
-          currentFromBlock += batchSize;
+          currentToBlock -= batchSize;
+          currentFromBlock = Math.max(Number(currentToBlock) - Number(batchSize) + 1, Number(fromBlock || 8654330n));
         }
 
-        console.log("Finished reading events");
         setError(undefined);
       } catch (e: any) {
         console.error("Error reading events:", e);
