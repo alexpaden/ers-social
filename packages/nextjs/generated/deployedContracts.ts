@@ -5,7 +5,7 @@ const contracts = {
       name: "baseGoerli",
       contracts: {
         ReputationServiceMachine: {
-          address: "0x6e25efA193bB25319216b1b28276159e1ef0FAbD",
+          address: "0x09c09308A737Ad0EA2c31ec507ba7DE8F86d223C",
           abi: [
             {
               inputs: [],
@@ -257,6 +257,100 @@ const contracts = {
                   internalType: "address[]",
                   name: "",
                   type: "address[]",
+                },
+              ],
+              stateMutability: "view",
+              type: "function",
+            },
+            {
+              inputs: [
+                {
+                  internalType: "address",
+                  name: "user",
+                  type: "address",
+                },
+              ],
+              name: "getGivenReputationData",
+              outputs: [
+                {
+                  components: [
+                    {
+                      internalType: "address",
+                      name: "otherAddress",
+                      type: "address",
+                    },
+                    {
+                      internalType: "int256",
+                      name: "score",
+                      type: "int256",
+                    },
+                    {
+                      internalType: "uint256",
+                      name: "timestamp",
+                      type: "uint256",
+                    },
+                    {
+                      internalType: "string",
+                      name: "tag",
+                      type: "string",
+                    },
+                    {
+                      internalType: "bytes32",
+                      name: "commentHash",
+                      type: "bytes32",
+                    },
+                  ],
+                  internalType:
+                    "struct ReputationServiceMachine.DetailedReputationData[]",
+                  name: "",
+                  type: "tuple[]",
+                },
+              ],
+              stateMutability: "view",
+              type: "function",
+            },
+            {
+              inputs: [
+                {
+                  internalType: "address",
+                  name: "user",
+                  type: "address",
+                },
+              ],
+              name: "getReceivedReputationData",
+              outputs: [
+                {
+                  components: [
+                    {
+                      internalType: "address",
+                      name: "otherAddress",
+                      type: "address",
+                    },
+                    {
+                      internalType: "int256",
+                      name: "score",
+                      type: "int256",
+                    },
+                    {
+                      internalType: "uint256",
+                      name: "timestamp",
+                      type: "uint256",
+                    },
+                    {
+                      internalType: "string",
+                      name: "tag",
+                      type: "string",
+                    },
+                    {
+                      internalType: "bytes32",
+                      name: "commentHash",
+                      type: "bytes32",
+                    },
+                  ],
+                  internalType:
+                    "struct ReputationServiceMachine.DetailedReputationData[]",
+                  name: "",
+                  type: "tuple[]",
                 },
               ],
               stateMutability: "view",

@@ -37,6 +37,14 @@ contract ReputationServiceMachine is Ownable, ReentrancyGuard {
         string comment;
     }
 
+    struct DetailedReputationData {
+        address otherAddress;
+        int score;
+        uint timestamp;
+        string tag;
+        bytes32 commentHash;
+    }
+
     mapping(address => mapping(address => ReputationData)) public reputationData; // Nested mapping for reputation data
     mapping(address => int) public totalScore;
 
@@ -57,7 +65,7 @@ contract ReputationServiceMachine is Ownable, ReentrancyGuard {
     
     // Constructor to initialize contract with default values
     constructor() {
-        reputationFee = 0.01 ether;
+        reputationFee = 0 ether;
         operatorEquity = 100;
         operatorRevenue = 0;
         maxCommentBytes = 320;
@@ -294,5 +302,33 @@ contract ReputationServiceMachine is Ownable, ReentrancyGuard {
     // Function to get the total score for a specific address
     function getTotalScore(address user) public view returns (int) {
         return totalScore[user];
+    }
+
+
+    // Function to get all given reputation data for a user
+    function getGivenReputationData(address user) public view returns (DetailedReputationData[] memory) {
+        address[] memory addresses = givenReputation[user].values();
+        DetailedReputationData[] memory result = new DetailedReputationData[](addresses.length);
+
+        for (uint i = 0; i < addresses.length; i++) {
+            (int score, uint timestamp, string memory tag, bytes32 commentHash) = getReputationData(user, addresses[i]);
+            result[i] = DetailedReputationData(addresses[i], score, timestamp, tag, commentHash);
+        }
+
+        return result;
+    }
+
+
+    // Function to get all received reputation data for a user
+    function getReceivedReputationData(address user) public view returns (DetailedReputationData[] memory) {
+        address[] memory addresses = receivedReputation[user].values();
+        DetailedReputationData[] memory result = new DetailedReputationData[](addresses.length);
+
+        for (uint i = 0; i < addresses.length; i++) {
+            (int score, uint timestamp, string memory tag, bytes32 commentHash) = getReputationData(addresses[i], user);
+            result[i] = DetailedReputationData(addresses[i], score, timestamp, tag, commentHash);
+        }
+
+        return result;
     }
 }
