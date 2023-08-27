@@ -1,4 +1,6 @@
-import { useState } from "react";
+import React, { useEffect, useState } from "react";
+import { HareIcon } from "./assets/HareIcon";
+import axios from "axios";
 import { useAccount } from "wagmi";
 import { useScaffoldContractRead } from "~~/hooks/scaffold-eth";
 
@@ -8,10 +10,36 @@ type DetailedReputationData = {
   timestamp: bigint;
   tag: string;
   commentHash: string;
+  comment?: string;
+};
+
+const useFetchCommentsFromAPI = (commentHashes: string[]) => {
+  const [comments, setComments] = useState<{ [key: string]: string }>({});
+
+  useEffect(() => {
+    const fetchComments = async () => {
+      try {
+        const response = await axios.post("https://ers-events-indexer-production-12c3.up.railway.app/comment/lookup", {
+          commentHashes,
+        });
+        setComments(response.data);
+      } catch (error) {
+        console.error("Error fetching comments:", error);
+      }
+    };
+
+    if (commentHashes.length > 0) {
+      fetchComments();
+    }
+  }, [commentHashes]);
+
+  return comments;
 };
 
 export const ContractData = () => {
   const { address } = useAccount();
+  const [showGiven, setShowGiven] = useState(true);
+  const [commentHashes, setCommentHashes] = useState<string[]>([]);
 
   const { data: givenReputationData } = useScaffoldContractRead({
     contractName: "ReputationServiceMachine",
@@ -31,61 +59,79 @@ export const ContractData = () => {
     args: [address],
   });
 
-  const [showGiven, setShowGiven] = useState(true);
-
   const formatScore = (score: bigint, tag: string) => (
     <div className="flex flex-col items-center justify-center h-full">
       <span className="flex items-center">
-        <span className="text-gray-400 text-sm">(</span>
-        <span className={`text-4xl font-mono font-bold ${score > 0 ? 'text-green-500' : score < 0 ? 'text-red-500' : 'text-gray-400'}`}>{score > 0 ? '+' : ''}{score.toString()}</span>
-        <span className="text-gray-400 text-sm">)</span>
+        <span className="text-4xl font-mono font-bold">
+          {score > 0 ? "+" : ""}
+          {score.toString()}
+        </span>
       </span>
-      <div className="bg-blue-200 text-blue-800 text-xs rounded-full px-2 py-1 mt-1 truncate w-16 text-center">{tag}</div>
+      <div className="text-xs rounded-full px-2 py-1 mt-1 truncate w-16 text-center">{tag}</div>
     </div>
   );
 
+  useEffect(() => {
+    if (givenReputationData && receivedReputationData) {
+      const newCommentHashes = [...givenReputationData, ...receivedReputationData].map(item =>
+        item.commentHash.slice(2),
+      );
+      setCommentHashes(newCommentHashes);
+    }
+  }, [givenReputationData, receivedReputationData]);
+
+  const commentsFromAPI = useFetchCommentsFromAPI(commentHashes);
+
+  const joinComments = (arr1, comments) => {
+    return arr1.map(item1 => ({
+      ...item1,
+      comment: comments[item1.commentHash.slice(2)] || "Loading...",
+    }));
+  };
+
+  const joinedData = showGiven
+    ? joinComments(givenReputationData || [], commentsFromAPI)
+    : joinComments(receivedReputationData || [], commentsFromAPI);
+
   return (
-    <div className="flex flex-col justify-center items-center bg-[url('/assets/gradient-bg.png')] bg-[length:100%_100%] py-10 px-5 sm:px-0 lg:py-auto max-w-[100vw]">
-      <div className="max-w-2xl bg-base-200 bg-opacity-70 rounded-2xl shadow-lg px-5 py-4 w-full">
+    <div className="flex flex-col justify-center items-center bg-gradient-to-r from-blue-400 to-purple-500 py-10 px-5 sm:px-0 lg:py-auto max-w-[100vw]">
+      <HareIcon className="absolute right-0 bottom-24" />
+      <div className="max-w-2xl bg-white bg-opacity-70 rounded-2xl shadow-lg px-5 py-4 w-full relative z-1">
         <div className="flex justify-between items-center mb-4">
           <div className="btn-group">
-            <button className={`btn ${showGiven ? 'btn-primary' : 'btn-outline'}`} onClick={() => setShowGiven(true)}>Given</button>
-            <button className={`btn ${showGiven ? 'btn-outline' : 'btn-primary'}`} onClick={() => setShowGiven(false)}>Received</button>
+            <button className={`btn ${showGiven ? "btn-primary" : "btn-outline"}`} onClick={() => setShowGiven(true)}>
+              Given
+            </button>
+            <button className={`btn ${showGiven ? "btn-outline" : "btn-primary"}`} onClick={() => setShowGiven(false)}>
+              Received
+            </button>
           </div>
-          <div className="bg-secondary border border-primary rounded-xl flex">
-            <div className="p-2 py-1 border-r border-primary flex items-end">Total Score</div>
-            <div className="text-4xl text-right min-w-[3rem] px-2 py-1 flex justify-end font-bai-jamjuree">
-              {formatScore(totalScore || 0)}
+          <div className="flex">
+            <div className="p-2 py-1 flex items-end">Total Score</div>
+            <div className="text-4xl text-right min-w-[3rem] px-2 py-1 flex justify-end">
+              {totalScore?.toString() || "0"}
             </div>
           </div>
         </div>
-        {showGiven ? renderReputationList(givenReputationData, address) : renderReputationList(receivedReputationData, address, true)}
-      </div>
-    </div>
-  );
-
-  function renderReputationList(data: DetailedReputationData[] | undefined, address: string, isReceived = false) {
-    return (
-      <>
-        <h3 className="text-xl font-bold mb-3">{isReceived ? "Received Reputation From:" : "Given Reputation To:"}</h3>
+        <h3 className="text-xl font-bold mb-3">{showGiven ? "Given Reputation To:" : "Received Reputation From:"}</h3>
         <ul>
-          {data?.map((item: DetailedReputationData, index: number) => (
-            <li key={index} className="bg-white p-4 rounded-lg shadow mb-4">
+          {joinedData.map((item, index) => (
+            <li key={index} className="bg-gray-100 p-4 rounded-lg shadow mb-4">
               <div className="flex justify-between items-center">
-                <div className="w-1/4">
-                  {formatScore(item.score, item.tag)}
-                </div>
+                <div className="w-1/4">{formatScore(item.score, item.tag)}</div>
                 <div className="text-xs text-gray-400 ml-2 w-3/4">
-                  <div>Sender: {isReceived ? address : item.otherAddress}</div>
-                  <div>Receiver: {isReceived ? item.otherAddress : address}</div>
+                  <div>Sender: {(showGiven ? address : item.otherAddress).slice(-7)}</div>
+                  <div>Receiver: {(showGiven ? item.otherAddress : address).slice(-7)}</div>
                 </div>
               </div>
               <hr className="my-2" />
-              <div className="text-sm text-gray-600">{item.commentHash}</div>
+              <div className="text-sm text-gray-600">{item.comment || "Loading..."}</div>
             </li>
           ))}
         </ul>
-      </>
-    );
-  }
+      </div>
+    </div>
+  );
 };
+
+export default ContractData;
