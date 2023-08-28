@@ -11,7 +11,14 @@ const isENS = (address = "") => address.endsWith(".eth") || address.endsWith(".x
 /**
  * Address input with ENS name resolution
  */
-export const AddressInput = ({ value, name, placeholder, onChange, disabled }: CommonInputProps<Address | string>) => {
+export const AddressInput = ({
+  value,
+  name,
+  placeholder,
+  onChange,
+  disabled,
+  onKeyDown,
+}: CommonInputProps<Address | string>) => {
   const { data: ensAddress, isLoading: isEnsAddressLoading } = useEnsAddress({
     name: value,
     enabled: isENS(value),
@@ -51,30 +58,60 @@ export const AddressInput = ({ value, name, placeholder, onChange, disabled }: C
     [onChange],
   );
 
-  return (
-    <InputBase<Address>
-      name={name}
-      placeholder={placeholder}
-      error={ensAddress === null}
-      value={value}
-      onChange={handleChange}
-      disabled={isEnsAddressLoading || isEnsNameLoading || disabled}
-      prefix={
-        ensName && (
-          <div className="flex bg-base-300 rounded-l-full items-center">
-            {ensAvatar ? (
-              <span className="w-[35px]">
-                {
-                  // eslint-disable-next-line
-                  <img className="w-full rounded-full" src={ensAvatar} alt={`${ensAddress} avatar`} />
-                }
-              </span>
-            ) : null}
-            <span className="text-accent px-2">{enteredEnsName ?? ensName}</span>
-          </div>
-        )
+  const handleKeyDown = useCallback(
+    (e: React.KeyboardEvent<HTMLInputElement>) => {
+      console.log("Key down event triggered"); // Add this line
+      if (e.key === "Enter") {
+        console.log("Enter key pressed"); // Add this line
+        console.log("onKeyDown is:", onKeyDown); // Add this line
+        onKeyDown?.(e);
       }
-      suffix={value && <Blockies className="!rounded-full" seed={value?.toLowerCase() as string} size={7} scale={5} />}
-    />
+    },
+    [onKeyDown],
+  );
+
+  const TypedInputBase = InputBase as React.FC<CommonInputProps<Address>>;
+
+  return (
+    <div className="bg-white">
+      {" "}
+      {/* Added bg-white here */}
+      {console.log("handleKeyDown is:", handleKeyDown)} {/* Add this line */}
+      <TypedInputBase
+        name={name}
+        placeholder="Search for ENS or Address"
+        className="w-full"
+        error={ensAddress === null}
+        value={value}
+        onChange={handleChange}
+        disabled={isEnsAddressLoading || isEnsNameLoading || disabled}
+        onKeyDown={handleKeyDown}
+        disabled={isEnsAddressLoading || isEnsNameLoading || disabled}
+        prefix={
+          ensName && (
+            <div className="flex bg-base-300 rounded-l-full items-center justify-center">
+              {ensAvatar ? (
+                <span className="w-[35px]">
+                  {
+                    // eslint-disable-next-line
+                    <img className="w-full align-middle" src={ensAvatar} alt={`${ensAddress} avatar`} />
+                  }
+                </span>
+              ) : null}
+              <span className="text-accent px-2">{enteredEnsName ?? ensName}</span>
+            </div>
+          )
+        }
+        suffix={
+          value && (
+            <div className="flex items-center">
+              {" "}
+              {/* Added flex and items-center */}
+              <Blockies className="!rounded-full" seed={value?.toLowerCase() as string} size={7} scale={5} />
+            </div>
+          )
+        }
+      />
+    </div>
   );
 };

@@ -2,8 +2,9 @@ import React, { useCallback, useRef, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/router";
-import { Bars3Icon, BugAntIcon, MagnifyingGlassIcon, SparklesIcon } from "@heroicons/react/24/outline";
+import { Bars3Icon, BugAntIcon } from "@heroicons/react/24/outline";
 import { FaucetButton, RainbowKitCustomConnectButton } from "~~/components/scaffold-eth";
+import { AddressInput } from "~~/components/scaffold-eth/Input/AddressInput";
 import { useOutsideClick } from "~~/hooks/scaffold-eth";
 
 const NavLink = ({ href, children }: { href: string; children: React.ReactNode }) => {
@@ -23,15 +24,30 @@ const NavLink = ({ href, children }: { href: string; children: React.ReactNode }
   );
 };
 
-/**
- * Site header
- */
 export const Header = () => {
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
   const burgerMenuRef = useRef<HTMLDivElement>(null);
   useOutsideClick(
     burgerMenuRef,
     useCallback(() => setIsDrawerOpen(false), []),
+  );
+
+  const [address, setAddress] = useState("");
+  const router = useRouter();
+
+  const handleAddressChange = useCallback((newAddress: React.SetStateAction<string>) => {
+    setAddress(newAddress);
+  }, []);
+
+  const handleAddressSubmit = useCallback(
+    (e: React.KeyboardEvent<HTMLInputElement>) => {
+      e.preventDefault();
+      console.log("handleAddressSubmit called"); // Add this line
+      if (address) {
+        router.push(`/${address}`);
+      }
+    },
+    [address, router],
   );
 
   const navLinks = (
@@ -49,44 +65,48 @@ export const Header = () => {
   );
 
   return (
-    <div className="sticky lg:static top-0 navbar bg-base-100 min-h-0 flex-shrink-0 justify-between z-20 shadow-md shadow-secondary px-0 sm:px-2">
-      <div className="navbar-start w-auto lg:w-1/2">
-        <div className="lg:hidden dropdown" ref={burgerMenuRef}>
-          <label
+    <div className="sticky lg:static top-0 navbar bg-transparent min-h-0 flex-shrink-0 justify-between z-20 shadow-md shadow-secondary px-0 sm:px-2">
+      <div className="flex items-center gap-2 ml-4 mr-6">
+        <div className="flex relative w-10 h-10">
+          <Image alt="SE2 logo" className="cursor-pointer" fill src="/logo.svg" />
+        </div>
+        <div className="flex flex-col">
+          <span className="font-bold leading-tight">Social Reputation</span>
+          <span className="text-xs">by ERS.blue</span>
+        </div>
+      </div>
+
+      <div className="flex-grow">
+        <AddressInput value={address} onChange={handleAddressChange} onKeyDown={handleAddressSubmit} />
+      </div>
+
+      <div className="flex-grow"></div>
+
+      <div className="flex items-center" ref={burgerMenuRef}>
+        <label
+          tabIndex={0}
+          className={`ml-1 btn btn-ghost ${isDrawerOpen ? "hover:bg-secondary" : "hover:bg-transparent"}`}
+          onClick={() => {
+            setIsDrawerOpen(prevIsOpenState => !prevIsOpenState);
+          }}
+        >
+          <Bars3Icon className="h-1/2" />
+        </label>
+        {isDrawerOpen && (
+          <ul
             tabIndex={0}
-            className={`ml-1 btn btn-ghost ${isDrawerOpen ? "hover:bg-secondary" : "hover:bg-transparent"}`}
+            className="menu menu-compact dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-52"
             onClick={() => {
-              setIsDrawerOpen(prevIsOpenState => !prevIsOpenState);
+              setIsDrawerOpen(false);
             }}
           >
-            <Bars3Icon className="h-1/2" />
-          </label>
-          {isDrawerOpen && (
-            <ul
-              tabIndex={0}
-              className="menu menu-compact dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-52"
-              onClick={() => {
-                setIsDrawerOpen(false);
-              }}
-            >
-              {navLinks}
-            </ul>
-          )}
-        </div>
-        <Link href="/" passHref className="hidden lg:flex items-center gap-2 ml-4 mr-6">
-          <div className="flex relative w-10 h-10">
-            <Image alt="SE2 logo" className="cursor-pointer" fill src="/logo.svg" />
-          </div>
-          <div className="flex flex-col">
-            <span className="font-bold leading-tight">Social Reputation</span>
-            <span className="text-xs">by ERS.blue</span>
-          </div>
-        </Link>
-        <ul className="hidden lg:flex lg:flex-nowrap menu menu-horizontal px-1 gap-2">{navLinks}</ul>
+            {navLinks}
+          </ul>
+        )}
       </div>
-      <div className="navbar-end flex-grow mr-4">
+
+      <div className="flex items-center gap-2">
         <RainbowKitCustomConnectButton />
-        <FaucetButton />
       </div>
     </div>
   );
