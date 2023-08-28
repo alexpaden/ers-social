@@ -59,9 +59,9 @@ const Home = () => {
       </MetaHeader>
 
       <main className="flex flex-col items-center justify-center w-full flex-1 text-center">
-        <h1 className="text-6xl font-extrabold mb-4 gradient-text">Forge web3 trust</h1>
+        <h1 className="text-6xl font-extrabold mb-4 gradient-text">Forge trust in web3</h1>
         <div className="text-lg mb-8 font-semibold description-darker">
-          Our onchain badge of honor, community-curated reputation.
+          Our onchain badge of honor, community-curated, one reputation at a time.
         </div>
         <div className="relative w-full max-w-md">
           <div className="mt-1 relative rounded-md shadow-sm">
