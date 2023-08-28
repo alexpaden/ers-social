@@ -53,7 +53,6 @@ const wallets = [
   rainbowWallet(walletsOptions),
 ];
 
-
 /**
  * wagmi connectors for the wagmi context
  */

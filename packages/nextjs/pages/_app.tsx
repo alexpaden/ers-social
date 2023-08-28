@@ -23,11 +23,11 @@ const ScaffoldEthApp = ({ Component, pageProps }: AppProps) => {
             style={{ background: "linear-gradient(to right, lightblue, plum)" }}
           >
             {/* Gradient background */}
-            <Header  /> 
+            <Header />
             <main className="relative flex flex-col flex-1" style={{ paddingBottom: "0" }}>
               <Component {...pageProps} />
             </main>
-            <Footer  />
+            <Footer />
           </div>
         </AddressProvider>
         <Toaster />

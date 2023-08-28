@@ -8,4 +8,3 @@ import create from "zustand";
  *
  * Think about it as a global useState.
  */
-

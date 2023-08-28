@@ -8,6 +8,7 @@
     ]
   },
   "scripts": {
+    "vercel-build": "next build",
     "account": "yarn workspace @se-2/hardhat account",
     "chain": "yarn workspace @se-2/hardhat chain",
     "compile": "yarn workspace @se-2/hardhat compile",
