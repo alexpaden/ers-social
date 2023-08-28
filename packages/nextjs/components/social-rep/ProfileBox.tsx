@@ -2,10 +2,7 @@ import React, { useState } from "react";
 import ContractWrite from "./ContractWrite";
 import "daisyui/dist/full.css";
 
-interface ProfileBoxProps {
-  address?: string | string[]; // Added the address prop
-}
-const ProfileBox = ({ address }) => {
+const ProfileBox = ({ address }: { address: string }) => {
   const [showDropdown, setShowDropdown] = useState(false);
 
   const toggleDropdown = () => {

@@ -1,5 +1,4 @@
 import React, { useCallback, useRef, useState } from "react";
-import Image from "next/image";
 import { useRouter } from "next/router";
 import AddressInputComponent from "./AddressInputComponent";
 import { Bars3Icon, BugAntIcon } from "@heroicons/react/24/outline";
@@ -42,7 +41,7 @@ export const Header = () => {
     <div className="relative sticky lg:static top-0 navbar bg-transparent min-h-0 flex-shrink-0 justify-between z-20 shadow-md shadow-secondary px-0 sm:px-2">
       <div className="flex items-center gap-2 ml-4 mr-6 cursor-pointer" onClick={navigateToHome}>
         <div className="flex relative w-10 h-10 logo-size">
-          <Image alt="SE2 logo" className="cursor-pointer" fill src="/logo.svg" />
+          <img alt="SE2 logo" className="cursor-pointer" src="/logo.svg" />
         </div>
         <div className="flex flex-col">
           <span className="font-bold leading-tight gradient-title">ERS</span>

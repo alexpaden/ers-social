@@ -1,21 +1,6 @@
 import React, { useEffect, useState } from "react";
-import { useAddress } from "../AddressContext";
 import axios from "axios";
-import { useAccount } from "wagmi";
 import { useScaffoldContractRead } from "~~/hooks/scaffold-eth";
-
-type DetailedReputationData = {
-  otherAddress: string;
-  score: bigint;
-  timestamp: bigint;
-  tag: string;
-  commentHash: string;
-  comment?: string;
-};
-
-interface ContractDataProps {
-  address?: string | string[]; // Added the address prop
-}
 
 const useFetchCommentsFromAPI = (commentHashes: string[]) => {
   const [comments, setComments] = useState<{ [key: string]: string }>({});
@@ -40,7 +25,7 @@ const useFetchCommentsFromAPI = (commentHashes: string[]) => {
   return comments;
 };
 
-export const ContractData = ({ address }) => {
+export const ContractData = ({ address }: { address: string }) => {
   //const { address } = useAccount();
   const [showGiven, setShowGiven] = useState(true);
   const [commentHashes, setCommentHashes] = useState<string[]>([]);
@@ -86,7 +71,7 @@ export const ContractData = ({ address }) => {
 
   const commentsFromAPI = useFetchCommentsFromAPI(commentHashes);
 
-  const joinComments = (arr1, comments) => {
+  const joinComments = (arr1: ReadonlyArray<any>, comments: { [key: string]: string }): any[] => {
     return arr1.map(item1 => ({
       ...item1,
       comment: comments[item1.commentHash.slice(2)] || "Loading...",

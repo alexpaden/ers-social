@@ -1,9 +1,7 @@
 import React, { ChangeEvent, KeyboardEvent, useCallback, useEffect, useState } from "react";
-// Make sure to install 'wagmi' or replace with equivalent hooks
 import { useAddress } from "./AddressContext";
 import Blockies from "react-blockies";
 import { isAddress } from "viem";
-// Make sure to install 'viem' or replace with equivalent function
 import { useEnsAddress, useEnsAvatar, useEnsName } from "wagmi";
 
 const isENS = (address = "") => address.endsWith(".eth") || address.endsWith(".xyz");
@@ -59,7 +57,7 @@ const AddressInputComponent = () => {
           <div className="flex bg-base-300 rounded-l-full items-center justify-center">
             {ensAvatar ? (
               <span className="w-[35px]">
-                <img className="w-full align-middle" src={ensAvatar} alt={`${ensAddress} avatar`} />
+                <img className="w-full align-middle" src={ensAvatar} alt={`${ensAddress} avatar`} width={35} />
               </span>
             ) : null}
             <span className="text-accent px-2">{ensName}</span>

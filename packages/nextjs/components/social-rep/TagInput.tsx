@@ -1,4 +1,3 @@
-import { useCallback } from "react";
 import { CommonInputProps, InputBase } from "~~/components/scaffold-eth";
 
 export const TagInput = ({ value, onChange, name, placeholder, disabled }: CommonInputProps<string>) => {

@@ -1,22 +1,9 @@
 {
     "version": 2,
-    "name": "se-2",
-    "projects": [
+    "builds": [
       {
-        "name": "@se-2/nextjs",
-        "root": "packages/nextjs",
-        "builds": [
-          {
-            "src": "package.json",
-            "use": "@vercel/next"
-          }
-        ],
-        "routes": [
-          {
-            "src": "/(.*)",
-            "dest": "/$1"
-          }
-        ]
+        "src": "packages/nextjs/package.json",
+        "use": "@vercel/next"
       }
     ]
   }

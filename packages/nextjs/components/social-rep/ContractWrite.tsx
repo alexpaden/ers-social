@@ -1,14 +1,8 @@
 import React, { useEffect, useRef, useState } from "react";
-import { useAddress } from "../AddressContext";
 import { useScaffoldContractWrite } from "~~/hooks/scaffold-eth";
 
-interface ContractWriteProps {
-  address?: string | string[]; // Added the address prop
-}
-
-const ContractWrite = ({ address }) => {
+const ContractWrite = ({ address }: { address: string }) => {
   const [customTag, setCustomTag] = useState("");
-  const { address: contextAddress, setAddress } = useAddress();
   const [formData, setFormData] = useState({
     score: "1",
     tag: "🔵 Default",
@@ -16,8 +10,8 @@ const ContractWrite = ({ address }) => {
   });
   const [submitTimer, setSubmitTimer] = useState<NodeJS.Timeout | null>(null);
   const [progress, setProgress] = useState(0);
+  const tagDropdownRef = useRef<HTMLDivElement | null>(null);
   const [showTagDropdown, setShowTagDropdown] = useState(false);
-  const tagDropdownRef = useRef(null);
 
   const tagOptions = [
     { label: "🔵 Default" },
@@ -34,20 +28,21 @@ const ContractWrite = ({ address }) => {
     { label: "Positive", value: "2", color: "#BBFFBB", emoji: "😃" },
   ];
 
-  const { writeAsync, isLoading } = useScaffoldContractWrite({
+  const { writeAsync } = useScaffoldContractWrite({
     contractName: "ReputationServiceMachine",
     functionName: "setReputation",
     args: [address, BigInt(formData.score), formData.tag, formData.comment],
     value: "0.01",
-    onBlockConfirmation: txnReceipt => {
+    onBlockConfirmation: (txnReceipt: { blockHash: any }) => {
       console.log("📦 Transaction blockHash", txnReceipt.blockHash);
       window.location.reload();
     },
   });
 
   useEffect(() => {
-    function handleClickOutside(event) {
-      if (tagDropdownRef.current && !tagDropdownRef.current.contains(event.target)) {
+    function handleClickOutside(event: Event) {
+      const target = event.target as Node;
+      if (tagDropdownRef.current && tagDropdownRef.current.contains(target)) {
         setShowTagDropdown(false);
       }
     }
@@ -61,21 +56,21 @@ const ContractWrite = ({ address }) => {
   useEffect(() => {
     if (progress >= 100) {
       console.log("Form submitted");
-      handleSubmit(); // Call the handleSubmit function
-      setProgress(0); // Reset progress
+      handleSubmit();
+      setProgress(0);
       if (submitTimer) {
-        clearInterval(submitTimer); // Clear the timer
+        clearInterval(submitTimer);
       }
-      setSubmitTimer(null); // Reset the timer state
+      setSubmitTimer(null);
     }
   }, [progress]);
 
-  const handleTagClick = tag => {
+  const handleTagClick = (tag: string) => {
     setFormData({ ...formData, tag });
     setShowTagDropdown(false);
   };
 
-  const handleCustomTag = e => {
+  const handleCustomTag = (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (e.key === "Enter") {
       setFormData({ ...formData, tag: customTag });
       setShowTagDropdown(false);
@@ -93,12 +88,12 @@ const ContractWrite = ({ address }) => {
     }
   };
 
-  const handleScoreClick = (e, score) => {
+  const handleScoreClick = (e: React.MouseEvent<HTMLDivElement, MouseEvent>, score: string) => {
     e.preventDefault();
     setFormData({ ...formData, score });
   };
 
-  const handleChange = e => {
+  const handleChange = (e: { target: { name: any; value: any } }) => {
     const { name, value } = e.target;
     setFormData({
       ...formData,
@@ -106,7 +101,7 @@ const ContractWrite = ({ address }) => {
     });
   };
 
-  const handleMouseDown = e => {
+  const handleMouseDown = (e: { preventDefault: () => void }) => {
     e.preventDefault();
     const timer = setInterval(() => {
       setProgress(prevProgress => Math.min(prevProgress + 10, 100));
@@ -114,7 +109,7 @@ const ContractWrite = ({ address }) => {
     setSubmitTimer(timer);
   };
 
-  const handleMouseUp = e => {
+  const handleMouseUp = (e: { preventDefault: () => void }) => {
     e.preventDefault();
     if (submitTimer) {
       clearInterval(submitTimer);
@@ -178,7 +173,7 @@ const ContractWrite = ({ address }) => {
               </div>
               <div className="relative z-10 flex flex-col items-center justify-end h-full font-mono mt-24">
                 <span className="block text-center text-sm font-extrabold opacity-90">
-                  {`${rating.label}(${rating.value > 0 ? "+" : ""}${rating.value})`}
+                  {`${rating.label}(${parseInt(rating.value, 10) > 0 ? "+" : ""}${rating.value})`}
                 </span>
               </div>
             </div>

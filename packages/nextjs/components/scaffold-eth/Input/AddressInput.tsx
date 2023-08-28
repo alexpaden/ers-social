@@ -1,17 +1,18 @@
 import { useCallback, useEffect, useState } from "react";
 import Blockies from "react-blockies";
-import { isAddress } from "viem";
-import { Address } from "viem";
+import { Address, isAddress } from "viem";
 import { useEnsAddress, useEnsAvatar, useEnsName } from "wagmi";
 import { CommonInputProps, InputBase } from "~~/components/scaffold-eth";
 
-// ToDo:  move this function to an utility file
 const isENS = (address = "") => address.endsWith(".eth") || address.endsWith(".xyz");
 
-/**
- * Address input with ENS name resolution
- */
-export const AddressInput = ({ value, name, placeholder, onChange, disabled }: CommonInputProps<Address | string>) => {
+interface AddressInputProps extends CommonInputProps<Address | string> {
+  error?: boolean;
+  prefix?: React.ReactNode; // Add this line
+  suffix?: React.ReactNode; // Add this line if needed
+}
+
+export const AddressInput = ({ value, name, onChange, disabled }: AddressInputProps) => {
   const { data: ensAddress, isLoading: isEnsAddressLoading } = useEnsAddress({
     name: value,
     enabled: isENS(value),
@@ -34,11 +35,8 @@ export const AddressInput = ({ value, name, placeholder, onChange, disabled }: C
     cacheTime: 30_000,
   });
 
-  // ens => address
   useEffect(() => {
     if (!ensAddress) return;
-
-    // ENS resolved successfully
     setEnteredEnsName(value);
     onChange(ensAddress);
   }, [ensAddress, onChange, value]);
@@ -51,19 +49,16 @@ export const AddressInput = ({ value, name, placeholder, onChange, disabled }: C
     [onChange],
   );
 
-  const TypedInputBase = InputBase as React.FC<CommonInputProps<Address>>;
+  const TypedInputBase = InputBase as React.FC<AddressInputProps>;
 
   return (
     <div className="bg-white">
-      {" "}
       <TypedInputBase
         name={name}
-        placeholder="Search for ENS or Address"
         className="w-full"
         error={ensAddress === null}
         value={value}
         onChange={handleChange}
-        disabled={isEnsAddressLoading || isEnsNameLoading || disabled}
         disabled={isEnsAddressLoading || isEnsNameLoading || disabled}
         prefix={
           ensName && (
@@ -83,8 +78,6 @@ export const AddressInput = ({ value, name, placeholder, onChange, disabled }: C
         suffix={
           value && (
             <div className="flex items-center">
-              {" "}
-              {/* Added flex and items-center */}
               <Blockies className="!rounded-full" seed={value?.toLowerCase() as string} size={7} scale={5} />
             </div>
           )

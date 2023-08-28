@@ -5,7 +5,8 @@ export const AddressContext = createContext<{
   setAddress: React.Dispatch<React.SetStateAction<string | null>>;
 }>({
   address: null,
-  setAddress: () => {}, // Initialize with a no-op function
+  // eslint-disable-next-line @typescript-eslint/no-empty-function
+  setAddress: () => {},
 });
 
 export const useAddress = () => {

@@ -1,8 +1,8 @@
 import React, { ChangeEvent, KeyboardEvent, useEffect, useState } from "react";
 import { useRouter } from "next/router";
-// Make sure to install 'wagmi' or replace with equivalent hooks
-import { isAddress } from "viem";
-import { useEnsAddress, useEnsName } from "wagmi";
+//import { isAddress } from "viem";
+//import { useEnsAddress, useEnsName } from "wagmi";
+import { useEnsAddress } from "wagmi";
 import { useAddress } from "~~/components/AddressContext";
 import { MetaHeader } from "~~/components/MetaHeader";
 
@@ -23,12 +23,12 @@ const Home = () => {
     cacheTime: 30_000,
   });
 
-  const { data: ensName } = useEnsName({
-    address: value,
-    enabled: isAddress(value),
-    chainId: 1,
-    cacheTime: 30_000,
-  });
+  // const { data: ensName } = useEnsName({
+  //   address: value,
+  //   enabled: isAddress(value),
+  //   chainId: 1,
+  //   cacheTime: 30_000,
+  // });
 
   useEffect(() => {
     if (ensAddress) {
