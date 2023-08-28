@@ -6,6 +6,7 @@ import { Bars3Icon, BugAntIcon } from "@heroicons/react/24/outline";
 import { FaucetButton, RainbowKitCustomConnectButton } from "~~/components/scaffold-eth";
 import { AddressInput } from "~~/components/scaffold-eth/Input/AddressInput";
 import { useOutsideClick } from "~~/hooks/scaffold-eth";
+import AddressInputComponent from "./AddressInputComponent";
 
 const NavLink = ({ href, children }: { href: string; children: React.ReactNode }) => {
   const router = useRouter();
@@ -77,7 +78,7 @@ export const Header = () => {
       </div>
 
       <div className="flex-grow">
-        <AddressInput value={address} onChange={handleAddressChange} onKeyDown={handleAddressSubmit} />
+        <AddressInputComponent />
       </div>
 
       <div className="flex-grow"></div>

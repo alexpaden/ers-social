@@ -17,7 +17,6 @@ export const AddressInput = ({
   placeholder,
   onChange,
   disabled,
-  onKeyDown,
 }: CommonInputProps<Address | string>) => {
   const { data: ensAddress, isLoading: isEnsAddressLoading } = useEnsAddress({
     name: value,
@@ -58,25 +57,12 @@ export const AddressInput = ({
     [onChange],
   );
 
-  const handleKeyDown = useCallback(
-    (e: React.KeyboardEvent<HTMLInputElement>) => {
-      console.log("Key down event triggered"); // Add this line
-      if (e.key === "Enter") {
-        console.log("Enter key pressed"); // Add this line
-        console.log("onKeyDown is:", onKeyDown); // Add this line
-        onKeyDown?.(e);
-      }
-    },
-    [onKeyDown],
-  );
 
   const TypedInputBase = InputBase as React.FC<CommonInputProps<Address>>;
 
   return (
     <div className="bg-white">
       {" "}
-      {/* Added bg-white here */}
-      {console.log("handleKeyDown is:", handleKeyDown)} {/* Add this line */}
       <TypedInputBase
         name={name}
         placeholder="Search for ENS or Address"
@@ -85,7 +71,6 @@ export const AddressInput = ({
         value={value}
         onChange={handleChange}
         disabled={isEnsAddressLoading || isEnsNameLoading || disabled}
-        onKeyDown={handleKeyDown}
         disabled={isEnsAddressLoading || isEnsNameLoading || disabled}
         prefix={
           ensName && (
