@@ -1,11 +1,15 @@
+import { useRouter } from "next/router";
 import DiamondIcon from "../components/social-rep/assets/DiamondIcon";
 import { HareIcon } from "../components/social-rep/assets/HareIcon";
 import type { NextPage } from "next";
+import { useAddress } from "~~/components/AddressContext";
 import { MetaHeader } from "~~/components/MetaHeader";
 import { ContractData } from "~~/components/social-rep/ContractData";
 import ProfileBox from "~~/components/social-rep/ProfileBox";
 
 const SocialUI: NextPage = () => {
+  const router = useRouter();
+  const { address } = router.query; 
   return (
     <>
       <MetaHeader title="reputation.blue" description="Social Reputation by ERS.blue (Ethereum Reputation Service)">
@@ -29,8 +33,8 @@ const SocialUI: NextPage = () => {
             margin: "0",
           }}
         >
-          <ProfileBox />
-          <ContractData />
+      <ProfileBox address={address} />
+      <ContractData address={address} />
         </div>
       </div>
     </>

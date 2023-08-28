@@ -3,8 +3,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { Bars3Icon, BugAntIcon } from "@heroicons/react/24/outline";
-import { FaucetButton, RainbowKitCustomConnectButton } from "~~/components/scaffold-eth";
-import { AddressInput } from "~~/components/scaffold-eth/Input/AddressInput";
+import { RainbowKitCustomConnectButton } from "~~/components/scaffold-eth";
 import { useOutsideClick } from "~~/hooks/scaffold-eth";
 import AddressInputComponent from "./AddressInputComponent";
 
@@ -33,23 +32,7 @@ export const Header = () => {
     useCallback(() => setIsDrawerOpen(false), []),
   );
 
-  const [address, setAddress] = useState("");
   const router = useRouter();
-
-  const handleAddressChange = useCallback((newAddress: React.SetStateAction<string>) => {
-    setAddress(newAddress);
-  }, []);
-
-  const handleAddressSubmit = useCallback(
-    (e: React.KeyboardEvent<HTMLInputElement>) => {
-      e.preventDefault();
-      console.log("handleAddressSubmit called"); // Add this line
-      if (address) {
-        router.push(`/${address}`);
-      }
-    },
-    [address, router],
-  );
 
   const navLinks = (
     <>

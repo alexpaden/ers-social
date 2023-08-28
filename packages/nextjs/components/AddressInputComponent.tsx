@@ -2,11 +2,14 @@ import React, { useCallback, useEffect, useState, ChangeEvent, KeyboardEvent } f
 import Blockies from 'react-blockies';
 import { isAddress } from 'viem'; // Make sure to install 'viem' or replace with equivalent function
 import { useEnsAddress, useEnsAvatar, useEnsName } from 'wagmi'; // Make sure to install 'wagmi' or replace with equivalent hooks
+import { useAddress } from './AddressContext';
 
 const isENS = (address = '') => address.endsWith('.eth') || address.endsWith('.xyz');
 
 const AddressInputComponent = () => {
   const [value, setValue] = useState('');
+  const { setAddress } = useAddress();
+
   const { data: ensAddress } = useEnsAddress({
     name: value,
     enabled: isENS(value),
@@ -31,7 +34,8 @@ const AddressInputComponent = () => {
   useEffect(() => {
     if (!ensAddress) return;
     setValue(ensAddress);
-  }, [ensAddress]);
+    setAddress(ensAddress); // Update the address in the context
+  }, [ensAddress, setAddress]);
 
   const handleChange = useCallback(
     (e: ChangeEvent<HTMLInputElement>) => {
@@ -79,5 +83,6 @@ const AddressInputComponent = () => {
     </div>
   );
 };
+
 
 export default AddressInputComponent;

@@ -2,7 +2,10 @@ import React, { useState } from "react";
 import ContractWrite from "./ContractWrite";
 import "daisyui/dist/full.css";
 
-const ProfileBox = () => {
+interface ProfileBoxProps {
+  address?: string | string[]; // Added the address prop
+}
+const ProfileBox = ({ address }) => {
   const [showDropdown, setShowDropdown] = useState(false);
 
   const toggleDropdown = () => {
@@ -12,6 +15,7 @@ const ProfileBox = () => {
   const containerStyle = {
     height: showDropdown ? "auto" : "100px", // Replace 100px with the height you want when the form is closed
   };
+
 
   return (
     <div style={containerStyle} className="p-[5%] w-full mx-auto my-10 relative">
@@ -34,7 +38,8 @@ const ProfileBox = () => {
             <span>{showDropdown ? "▼" : "◄"}</span>
           </button>
         </div>
-        {showDropdown && <ContractWrite />}
+        {showDropdown && <ContractWrite address={address} />}
+
       </div>
     </div>
   );

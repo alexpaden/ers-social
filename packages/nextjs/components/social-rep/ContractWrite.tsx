@@ -1,9 +1,14 @@
 import React, { useEffect, useRef, useState } from "react";
 import { useScaffoldContractWrite } from "~~/hooks/scaffold-eth";
+import { useAddress } from "../AddressContext";
 
-const ContractWrite = () => {
+interface ContractWriteProps {
+  address?: string | string[]; // Added the address prop
+}
+
+const ContractWrite = ({address}) => {
   const [customTag, setCustomTag] = useState("");
-  const [receiver, setReceiver] = useState("0x0000000000000000000000000000000000000000");
+  const { address: contextAddress, setAddress } = useAddress();
   const [formData, setFormData] = useState({
     score: "1",
     tag: "🔵 Default",
@@ -32,7 +37,7 @@ const ContractWrite = () => {
   const { writeAsync, isLoading } = useScaffoldContractWrite({
     contractName: "ReputationServiceMachine",
     functionName: "setReputation",
-    args: [receiver, BigInt(formData.score), formData.tag, formData.comment],
+    args: [address, BigInt(formData.score), formData.tag, formData.comment],
     value: "0.01",
     onBlockConfirmation: txnReceipt => {
       console.log("📦 Transaction blockHash", txnReceipt.blockHash);
@@ -80,7 +85,7 @@ const ContractWrite = () => {
   const handleSubmit = async () => {
     try {
       await writeAsync({
-        args: [receiver, BigInt(formData.score), formData.tag, formData.comment],
+        args: [address, BigInt(formData.score), formData.tag, formData.comment],
       });
       console.log("Transaction initiated.");
     } catch (error) {
