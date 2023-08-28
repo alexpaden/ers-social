@@ -42,10 +42,12 @@ const ScaffoldEthApp = ({ Component, pageProps }: AppProps) => {
       >
         <div className="flex flex-col min-h-screen">
           <Header />
-          <main className="relative flex flex-col flex-1">
+          <main className="relative flex flex-col flex-1" style={{ paddingBottom: "0" }}>
+            {" "}
+            {/* Adjust padding here */}
             <Component {...pageProps} />
           </main>
-          <Footer />
+          <Footer style={{ marginTop: "0" }} /> {/* Adjust margin here */}
         </div>
         <Toaster />
       </RainbowKitProvider>

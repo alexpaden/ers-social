@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import { HareIcon } from "./assets/HareIcon";
 import axios from "axios";
 import { useAccount } from "wagmi";
 import { useScaffoldContractRead } from "~~/hooks/scaffold-eth";
@@ -94,8 +93,7 @@ export const ContractData = () => {
     : joinComments(receivedReputationData || [], commentsFromAPI);
 
   return (
-    <div className="flex flex-col justify-center items-center bg-gradient-to-r from-blue-400 to-purple-500 py-10 px-5 sm:px-0 lg:py-auto max-w-[100vw]">
-      <HareIcon className="absolute right-0 bottom-24" />
+    <div className="flex flex-col justify-center items-center py-10 px-5 sm:px-0 lg:py-auto max-w-[100vw]">
       <div className="max-w-2xl bg-white bg-opacity-70 rounded-2xl shadow-lg px-5 py-4 w-full relative z-1">
         <div className="flex justify-between items-center mb-4">
           <div className="btn-group">
