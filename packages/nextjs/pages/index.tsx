@@ -59,9 +59,11 @@ const Home = () => {
       </MetaHeader>
 
       <main className="flex flex-col items-center justify-center w-full flex-1 text-center">
-        <h1 className="text-6xl font-extrabold mb-4 gradient-text">Forge trust in web3</h1>
+        <h1 className="text-8xl font-extrabold mb-4 gradient-text" style={{ lineHeight: 1.5 }}>
+          Reputation for anyone
+        </h1>
         <div className="text-lg mb-8 font-semibold description-darker">
-          Our onchain badge of honor, community-curated, one reputation at a time.
+          Reputation forged onchain, a community curated history, for the professionally social.
         </div>
         <div className="relative w-full max-w-md">
           <div className="mt-1 relative rounded-md shadow-sm">
@@ -74,8 +76,14 @@ const Home = () => {
               onChange={handleChange}
               onKeyDown={handleKeyDown}
               className="focus:ring-indigo-500 focus:border-indigo-500 block w-full pl-12 text-lg h-16 border-gray-300 rounded-md placeholder-darker"
-              placeholder="Search for a name"
-              style={{ backgroundColor: "white", color: "black" }} // Reset input style
+              placeholder="Find an address or ENS name"
+              style={{
+                backgroundColor: "white",
+                color: "black",
+                fontSize: "1.2em", // Increase font size
+                fontWeight: "bold", // Make it bold
+                opacity: 0.7, // Make it slightly opaque
+              }}
             />
 
             <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">

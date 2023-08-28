@@ -38,7 +38,7 @@ export const Header = () => {
   };
 
   return (
-    <div className="relative sticky lg:static top-0 navbar bg-transparent min-h-0 flex-shrink-0 justify-between z-20 shadow-md shadow-secondary px-0 sm:px-2">
+    <div className="relative sticky lg:static top-0 navbar bg-transparent min-h-0 flex-shrink-0 justify-between z-20 px-0 sm:px-2">
       <div className="flex items-center gap-2 ml-4 mr-6 cursor-pointer" onClick={navigateToHome}>
         <div className="flex relative w-10 h-10 logo-size">
           <img alt="SE2 logo" className="cursor-pointer" src="/logo.svg" />

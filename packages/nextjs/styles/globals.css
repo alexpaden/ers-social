@@ -55,27 +55,37 @@ p {
 }
 
 .connect-button-gradient {
-  width: 150px; /* Standardize the width */
-  height: 50px; /* Standardize the height */
+  width: 150px;
+  height: 50px;
   background: linear-gradient(to right, red, orange); /* Apply gradient */
-  color: white; /* Text color */
-  border: none; /* Remove border */
+  color: white;
+  border: none;
   border-radius: 8px; /* Rounded corners */
-  font-size: 16px; /* Text size */
-  cursor: pointer; /* Cursor style */
+  font-size: 16px;
+  cursor: pointer;
 }
 
 .connected-button-gradient {
-  display: flex; /* Align items horizontally */
-  align-items: center; /* Center items vertically */
+  display: flex;
+  align-items: center;
   background: linear-gradient(to right, red, orange);
   border: none !important;
   box-shadow: none !important;
   outline: none !important;
-  padding: 0.5rem 1rem; /* Add some padding */
-  border-radius: 8px; /* Add rounded corners */
+  padding: 0.5rem 1rem;
+  border-radius: 8px;
 }
 
 .dropdown-content {
-  min-width: 200px; /* Increase the width */
+  min-width: 200px;
+}
+
+::placeholder {
+  font-size: 1.2em;
+  font-weight: bold;
+  opacity: 0.7;
+}
+
+.underline-text {
+  text-decoration: underline !important;
 }
