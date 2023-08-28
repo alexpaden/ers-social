@@ -25,3 +25,60 @@ p {
 .btn.btn-ghost {
   @apply shadow-none;
 }
+
+.placeholder-darker::placeholder {
+  color: rgba(0, 0, 0, 0.4); /* 80% opacity black */
+  font-weight: bold; /* Make it bold */
+  font-size: 1.4em; /* Increase font size */
+}
+
+.description-darker {
+  color: rgba(0, 0, 0, 0.6); /* 80% opacity black */
+}
+
+.gradient-text {
+  background: linear-gradient(to right, red, orange);
+  -webkit-background-clip: text;
+  color: transparent;
+}
+
+
+.gradient-title {
+  background: linear-gradient(to right, red, orange);
+  -webkit-background-clip: text;
+  color: transparent;
+  font-size: 2.5em;
+}
+
+.logo-size {
+  width: 60px;
+  height: 60px;
+}
+
+.connect-button-gradient {
+  width: 150px;  /* Standardize the width */
+  height: 50px;  /* Standardize the height */
+  background: linear-gradient(to right, red, orange);  /* Apply gradient */
+  color: white;  /* Text color */
+  border: none;  /* Remove border */
+  border-radius: 8px;  /* Rounded corners */
+  font-size: 16px;  /* Text size */
+  cursor: pointer;  /* Cursor style */
+}
+
+.connected-button-gradient {
+  display: flex;  /* Align items horizontally */
+  align-items: center;  /* Center items vertically */
+  background: linear-gradient(to right, red, orange);
+  border: none !important;
+  box-shadow: none !important;
+  outline: none !important;
+  padding: 0.5rem 1rem;  /* Add some padding */
+  border-radius: 8px;  /* Add rounded corners */
+}
+
+.dropdown-content {
+  min-width: 200px;  /* Increase the width */
+}
+
+

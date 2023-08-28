@@ -19,7 +19,7 @@ const SocialUI: NextPage = () => {
       <div
         className="grid flex-grow"
         data-theme="exampleUi"
-        style={{ background: "linear-gradient(to right, blue, purple)" }}
+        style={{ background: "transparent" }}
       >
         <DiamondIcon className="absolute top-32 left-0 z-0" />
         <HareIcon className="absolute right-0 bottom-24" />
@@ -33,8 +33,8 @@ const SocialUI: NextPage = () => {
             margin: "0",
           }}
         >
-      <ProfileBox address={address} />
-      <ContractData address={address} />
+          <ProfileBox address={address} />
+          <ContractData address={address} />
         </div>
       </div>
     </>
