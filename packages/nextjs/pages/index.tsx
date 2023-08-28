@@ -1,7 +1,6 @@
 import type { NextPage } from "next";
 import { MetaHeader } from "~~/components/MetaHeader";
 import { ContractData } from "~~/components/social-rep/ContractData";
-import { ContractInteraction } from "~~/components/social-rep/ContractInteraction";
 import ProfileBox from "~~/components/social-rep/ProfileBox";
 
 const SocialUI: NextPage = () => {
@@ -14,7 +13,6 @@ const SocialUI: NextPage = () => {
       </MetaHeader>
       <div className="grid lg:grid-rows-2 flex-grow" data-theme="exampleUi">
         <ProfileBox />
-        <ContractInteraction />
         <ContractData />
       </div>
     </>

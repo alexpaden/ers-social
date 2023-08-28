@@ -1,12 +1,40 @@
 import React, { useEffect, useRef, useState } from "react";
+import DiamondIcon from "./assets/DiamondIcon";
 import "daisyui/dist/full.css";
+import { useScaffoldContractWrite } from "~~/hooks/scaffold-eth";
+
+// Import the hook
 
 const ProfileBox = () => {
   const [showDropdown, setShowDropdown] = useState(false);
   const [showTagDropdown, setShowTagDropdown] = useState(false);
   const [customTag, setCustomTag] = useState("");
+  const [receiver, setReceiver] = useState("0x0000000000000000000000000000000000000000");
+
   const tagDropdownRef = useRef(null);
-  const [submittedData, setSubmittedData] = useState(null);
+  const [submittedData, setSubmittedData] = useState<{
+    score: string;
+    tag: string;
+    comment: string;
+  } | null>(null);
+
+  // Contract Interaction State Variables
+  const [score, setScore] = useState(0);
+  const [tag, setTag] = useState("");
+  const [comment, setComment] = useState("");
+
+  const scoreBigInt = BigInt(score);
+
+  const { writeAsync, isLoading } = useScaffoldContractWrite({
+    contractName: "ReputationServiceMachine",
+    functionName: "setReputation",
+    args: [receiver, scoreBigInt, tag, comment],
+    value: "0.01",
+    onBlockConfirmation: txnReceipt => {
+      console.log("📦 Transaction blockHash", txnReceipt.blockHash);
+      window.location.reload();
+    },
+  });
 
   const [formData, setFormData] = useState({
     score: "1",
@@ -36,6 +64,7 @@ const ProfileBox = () => {
   useEffect(() => {
     if (progress >= 100) {
       console.log("Form submitted");
+      handleSubmit(); // Call the handleSubmit function
       setSubmittedData(formData);
       setProgress(0); // Reset progress
       if (submitTimer) {
@@ -74,14 +103,26 @@ const ProfileBox = () => {
     }
   };
 
-  const handleSubmit = e => {
-    e.preventDefault(); // Prevent default form submission
-    if (progress >= 100) {
-      console.log("Form submitted");
-      console.log("Score:", formData.score);
+  const handleSubmit = async () => {
+    try {
+      // Convert formData.score to BigInt
+      const scoreBigInt = BigInt(formData.score);
+
+      // Log the data that will be submitted
+      console.log("Submitting the following data to the contract:");
+      console.log("Receiver:", receiver);
+      console.log("Score:", scoreBigInt);
       console.log("Tag:", formData.tag);
       console.log("Comment:", formData.comment);
-      setProgress(0); // Reset progress
+
+      // Directly pass the arguments to writeAsync
+      await writeAsync({
+        args: [receiver, scoreBigInt, formData.tag, formData.comment],
+      });
+
+      console.log("Transaction initiated.");
+    } catch (error) {
+      console.error("An error occurred:", error);
     }
   };
 
@@ -124,8 +165,9 @@ const ProfileBox = () => {
   };
 
   return (
-    <div className="bg-gradient-to-r from-blue-400 to-purple-500 p-[5%] rounded-lg shadow-lg w-full mx-auto my-10">
-      <div className="bg-white p-4 rounded-lg shadow-lg">
+    <div className="bg-gradient-to-r from-blue-400 to-purple-500 p-[5%] rounded-lg shadow-lg w-full mx-auto my-10 relative">
+      <DiamondIcon className="absolute top-32 left-0 z-0" />
+      <div className="bg-white p-4 rounded-lg shadow-lg z-10 relative">
         <div className="flex justify-between items-center">
           <div className="flex items-center">
             <img src="https://via.placeholder.com/50" alt="Profile" className="rounded-md" />
@@ -146,7 +188,15 @@ const ProfileBox = () => {
         </div>
         {showDropdown && (
           <div className="mt-4 p-4 border rounded-lg bg-gray-100">
-            <h3 className="text-md font-semibold mb-4 text-center">Set Reputation Options</h3>
+            <div className="title-div">
+              <h3 className="text-xl font-semibold mb-1 text-center">Set Reputation Options</h3>
+              <div className="mt-1 flex gap-2 items-start text-center justify-center">
+                <div className="badge badge-warning text-xs font-normal" style={{ fontSize: "0.6rem" }}>
+                  Cost: 0.01 ETH + Gas
+                </div>
+              </div>
+              <hr className="my-2" />
+            </div>
             <form className="space-y-4" onSubmit={handleSubmit}>
               <div className="flex justify-center">
                 {ratings.map((rating, index) => (
