@@ -300,8 +300,7 @@ const contracts = {
                       type: "bytes32",
                     },
                   ],
-                  internalType:
-                    "struct ReputationServiceMachine.DetailedReputationData[]",
+                  internalType: "struct ReputationServiceMachine.DetailedReputationData[]",
                   name: "",
                   type: "tuple[]",
                 },
@@ -347,8 +346,7 @@ const contracts = {
                       type: "bytes32",
                     },
                   ],
-                  internalType:
-                    "struct ReputationServiceMachine.DetailedReputationData[]",
+                  internalType: "struct ReputationServiceMachine.DetailedReputationData[]",
                   name: "",
                   type: "tuple[]",
                 },
@@ -654,8 +652,7 @@ const contracts = {
                       type: "string",
                     },
                   ],
-                  internalType:
-                    "struct ReputationServiceMachine.ReputationBatch[]",
+                  internalType: "struct ReputationServiceMachine.ReputationBatch[]",
                   name: "reputations",
                   type: "tuple[]",
                 },

@@ -1,17 +1,22 @@
 import React, { useCallback, useRef, useState } from "react";
 import Image from "next/image";
 import { useRouter } from "next/router";
+import AddressInputComponent from "./AddressInputComponent";
 import { Bars3Icon, BugAntIcon } from "@heroicons/react/24/outline";
 import { RainbowKitCustomConnectButton } from "~~/components/scaffold-eth";
 import { useOutsideClick } from "~~/hooks/scaffold-eth";
-import AddressInputComponent from "./AddressInputComponent";
 
 const NavLink = ({ href, children }: { href: string; children: React.ReactNode }) => {
   const router = useRouter();
   const isActive = router.pathname === href;
 
   return (
-    <a href={href} className={`${isActive ? "bg-secondary shadow-md" : ""} hover:bg-secondary hover:shadow-md focus:!bg-secondary py-1.5 px-3 text-sm rounded-full gap-2 whitespace-nowrap`}>
+    <a
+      href={href}
+      className={`${
+        isActive ? "bg-secondary shadow-md" : ""
+      } hover:bg-secondary hover:shadow-md focus:!bg-secondary py-1.5 px-3 text-sm rounded-full gap-2 whitespace-nowrap`}
+    >
       {children}
     </a>
   );
@@ -24,12 +29,12 @@ export const Header = () => {
 
   useOutsideClick(
     burgerMenuRef,
-    useCallback(() => setIsDrawerOpen(false), [])
+    useCallback(() => setIsDrawerOpen(false), []),
   );
 
   const navigateToHome = () => {
-    if (router.pathname !== '/' && router.pathname !== '/_error') {
-      router.push('/');
+    if (router.pathname !== "/" && router.pathname !== "/_error") {
+      router.push("/");
     }
   };
 
@@ -44,9 +49,7 @@ export const Header = () => {
         </div>
       </div>
 
-      <div className="flex-grow">
-        {router.pathname !== '/' && <AddressInputComponent />}
-      </div>
+      <div className="flex-grow">{router.pathname !== "/" && <AddressInputComponent />}</div>
       <div className="flex-grow"></div>
       <div className="flex items-center relative" ref={burgerMenuRef}>
         <label
@@ -59,24 +62,24 @@ export const Header = () => {
           <Bars3Icon className="h-1/2" />
         </label>
         {isDrawerOpen && (
-  <ul
-    tabIndex={0}
-    className="absolute right-full mt-3 p-2 shadow bg-base-100 rounded-box w-[200px]"
-    onClick={() => {
-      setIsDrawerOpen(false);
-    }}
-  >
-    <li>
-      <NavLink href="/">Home</NavLink>
-    </li>
-    <li>
-      <NavLink href="/debug">
-        <BugAntIcon className="h-4 w-4" />
-        Debug Contract
-      </NavLink>
-    </li>
-  </ul>
-)}
+          <ul
+            tabIndex={0}
+            className="absolute right-full mt-3 p-2 shadow bg-base-100 rounded-box w-[200px]"
+            onClick={() => {
+              setIsDrawerOpen(false);
+            }}
+          >
+            <li>
+              <NavLink href="/">Home</NavLink>
+            </li>
+            <li>
+              <NavLink href="/debug">
+                <BugAntIcon className="h-4 w-4" />
+                Debug Contract
+              </NavLink>
+            </li>
+          </ul>
+        )}
       </div>
       <div className="flex items-center gap-2">
         <RainbowKitCustomConnectButton />

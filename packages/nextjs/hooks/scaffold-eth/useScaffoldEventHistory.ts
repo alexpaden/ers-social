@@ -42,13 +42,13 @@ export const useScaffoldEventHistory = <
 
         while (currentToBlock >= (fromBlock || 8654330n)) {
           console.log(`Reading logs from block ${currentFromBlock} to ${currentToBlock}`);
-        
+
           const logs = await publicClient.getLogs({
             address: deployedContractData?.address,
             event: abiEvent,
             args: filters as any,
             fromBlock: BigInt(currentFromBlock), // Ensure fromBlock is a BigInt
-            toBlock: BigInt(currentToBlock),     // Ensure toBlock is a BigInt
+            toBlock: BigInt(currentToBlock), // Ensure toBlock is a BigInt
           });
 
           const newEvents = [];

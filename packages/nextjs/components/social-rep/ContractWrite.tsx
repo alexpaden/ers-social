@@ -1,12 +1,12 @@
 import React, { useEffect, useRef, useState } from "react";
-import { useScaffoldContractWrite } from "~~/hooks/scaffold-eth";
 import { useAddress } from "../AddressContext";
+import { useScaffoldContractWrite } from "~~/hooks/scaffold-eth";
 
 interface ContractWriteProps {
   address?: string | string[]; // Added the address prop
 }
 
-const ContractWrite = ({address}) => {
+const ContractWrite = ({ address }) => {
   const [customTag, setCustomTag] = useState("");
   const { address: contextAddress, setAddress } = useAddress();
   const [formData, setFormData] = useState({
@@ -259,7 +259,7 @@ const ContractWrite = ({address}) => {
             onMouseUp={handleMouseUp}
             onMouseLeave={handleMouseLeave}
           >
-            <span className="mr-2">🕒</span> Cool Submit
+            <span className="mr-2">🕒</span> Forge Onchain (press and hold)
             <div
               className="absolute left-0 bottom-0 bg-gray-600"
               style={{ width: `${progress}%`, height: "4px" }}

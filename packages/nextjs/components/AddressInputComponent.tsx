@@ -1,13 +1,15 @@
-import React, { useCallback, useEffect, useState, ChangeEvent, KeyboardEvent } from 'react';
-import Blockies from 'react-blockies';
-import { isAddress } from 'viem'; // Make sure to install 'viem' or replace with equivalent function
-import { useEnsAddress, useEnsAvatar, useEnsName } from 'wagmi'; // Make sure to install 'wagmi' or replace with equivalent hooks
-import { useAddress } from './AddressContext';
+import React, { ChangeEvent, KeyboardEvent, useCallback, useEffect, useState } from "react";
+// Make sure to install 'wagmi' or replace with equivalent hooks
+import { useAddress } from "./AddressContext";
+import Blockies from "react-blockies";
+import { isAddress } from "viem";
+// Make sure to install 'viem' or replace with equivalent function
+import { useEnsAddress, useEnsAvatar, useEnsName } from "wagmi";
 
-const isENS = (address = '') => address.endsWith('.eth') || address.endsWith('.xyz');
+const isENS = (address = "") => address.endsWith(".eth") || address.endsWith(".xyz");
 
 const AddressInputComponent = () => {
-  const [value, setValue] = useState('');
+  const [value, setValue] = useState("");
   const { setAddress } = useAddress();
 
   const { data: ensAddress } = useEnsAddress({
@@ -37,16 +39,13 @@ const AddressInputComponent = () => {
     setAddress(ensAddress); // Update the address in the context
   }, [ensAddress, setAddress]);
 
-  const handleChange = useCallback(
-    (e: ChangeEvent<HTMLInputElement>) => {
-      setValue(e.target.value);
-    },
-    [],
-  );
+  const handleChange = useCallback((e: ChangeEvent<HTMLInputElement>) => {
+    setValue(e.target.value);
+  }, []);
 
   const handleKeyDown = useCallback(
     (e: KeyboardEvent<HTMLInputElement>) => {
-      if (e.key === 'Enter') {
+      if (e.key === "Enter") {
         window.location.href = `/${value}`;
       }
     },
@@ -83,6 +82,5 @@ const AddressInputComponent = () => {
     </div>
   );
 };
-
 
 export default AddressInputComponent;

@@ -16,7 +16,6 @@ const ProfileBox = ({ address }) => {
     height: showDropdown ? "auto" : "100px", // Replace 100px with the height you want when the form is closed
   };
 
-
   return (
     <div style={containerStyle} className="p-[5%] w-full mx-auto my-10 relative">
       <div className="bg-white p-4 rounded-lg shadow-lg z-10 relative">
@@ -33,13 +32,12 @@ const ProfileBox = ({ address }) => {
             className="flex items-center bg-gray-100 text-gray-700 font-bold border border-gray-600 px-4 py-2"
             style={{ borderRadius: "0" }}
           >
-            Set Reputation
+            Forge New Reputation
             <div className="border-l-2 border-gray-600 h-4 mx-2"></div>
             <span>{showDropdown ? "▼" : "◄"}</span>
           </button>
         </div>
         {showDropdown && <ContractWrite address={address} />}
-
       </div>
     </div>
   );

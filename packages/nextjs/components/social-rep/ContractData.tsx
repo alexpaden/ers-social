@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
+import { useAddress } from "../AddressContext";
 import axios from "axios";
 import { useAccount } from "wagmi";
 import { useScaffoldContractRead } from "~~/hooks/scaffold-eth";
-import { useAddress } from "../AddressContext";
 
 type DetailedReputationData = {
   otherAddress: string;

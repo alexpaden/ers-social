@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useState, ReactNode } from 'react';
+import React, { ReactNode, createContext, useContext, useState } from "react";
 
 export const AddressContext = createContext<{
   address: string | null;
@@ -8,15 +8,13 @@ export const AddressContext = createContext<{
   setAddress: () => {}, // Initialize with a no-op function
 });
 
-
 export const useAddress = () => {
   const context = useContext(AddressContext);
   if (!context) {
-    throw new Error('useAddress must be used within an AddressProvider');
+    throw new Error("useAddress must be used within an AddressProvider");
   }
   return context;
 };
-
 
 interface AddressProviderProps {
   children: ReactNode;
@@ -25,9 +23,5 @@ interface AddressProviderProps {
 export const AddressProvider: React.FC<AddressProviderProps> = ({ children }) => {
   const [address, setAddress] = useState<string | null>(null);
 
-  return (
-    <AddressContext.Provider value={{ address, setAddress }}>
-      {children}
-    </AddressContext.Provider>
-  );
+  return <AddressContext.Provider value={{ address, setAddress }}>{children}</AddressContext.Provider>;
 };

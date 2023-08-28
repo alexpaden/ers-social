@@ -11,13 +11,7 @@ const isENS = (address = "") => address.endsWith(".eth") || address.endsWith(".x
 /**
  * Address input with ENS name resolution
  */
-export const AddressInput = ({
-  value,
-  name,
-  placeholder,
-  onChange,
-  disabled,
-}: CommonInputProps<Address | string>) => {
+export const AddressInput = ({ value, name, placeholder, onChange, disabled }: CommonInputProps<Address | string>) => {
   const { data: ensAddress, isLoading: isEnsAddressLoading } = useEnsAddress({
     name: value,
     enabled: isENS(value),
@@ -56,7 +50,6 @@ export const AddressInput = ({
     },
     [onChange],
   );
-
 
   const TypedInputBase = InputBase as React.FC<CommonInputProps<Address>>;
 

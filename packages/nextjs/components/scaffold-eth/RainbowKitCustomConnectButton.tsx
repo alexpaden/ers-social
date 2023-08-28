@@ -49,13 +49,19 @@ export const RainbowKitCustomConnectButton = () => {
               </label>
               <ul className="dropdown-content menu p-2 mt-1 shadow-center shadow-accent bg-base-200 rounded-box gap-1">
                 <li>
-                  <button className="btn-sm !rounded-xl flex py-3 gap-3" onClick={() => switchNetwork?.(configuredNetwork.id)}>
+                  <button
+                    className="btn-sm !rounded-xl flex py-3 gap-3"
+                    onClick={() => switchNetwork?.(configuredNetwork.id)}
+                  >
                     <ArrowsRightLeftIcon className="h-6 w-4 ml-2 sm:ml-0" />
                     <span>Switch to {configuredNetwork.name}</span>
                   </button>
                 </li>
                 <li>
-                  <button className="menu-item text-error btn-sm !rounded-xl flex gap-3 py-3" onClick={() => disconnect()}>
+                  <button
+                    className="menu-item text-error btn-sm !rounded-xl flex gap-3 py-3"
+                    onClick={() => disconnect()}
+                  >
                     <ArrowLeftOnRectangleIcon className="h-6 w-4 ml-2 sm:ml-0" />
                     <span>Disconnect</span>
                   </button>
@@ -64,7 +70,6 @@ export const RainbowKitCustomConnectButton = () => {
             </div>
           );
         }
-
 
         return (
           <div className="connected-button-gradient px-2 flex justify-end items-center">
@@ -83,14 +88,20 @@ export const RainbowKitCustomConnectButton = () => {
                       <span>Copy address</span>
                     </div>
                   ) : (
-                    <CopyToClipboard text={account.address} onCopy={() => {
-                      setAddressCopied(true);
-                      setTimeout(() => {
-                        setAddressCopied(false);
-                      }, 800);
-                    }}>
+                    <CopyToClipboard
+                      text={account.address}
+                      onCopy={() => {
+                        setAddressCopied(true);
+                        setTimeout(() => {
+                          setAddressCopied(false);
+                        }, 800);
+                      }}
+                    >
                       <div className="btn-sm !rounded-xl flex gap-3 py-3">
-                        <DocumentDuplicateIcon className="text-xl font-normal h-6 w-4 cursor-pointer" aria-hidden="true" />
+                        <DocumentDuplicateIcon
+                          className="text-xl font-normal h-6 w-4 cursor-pointer"
+                          aria-hidden="true"
+                        />
                         <span>Copy address</span>
                       </div>
                     </CopyToClipboard>
@@ -105,11 +116,16 @@ export const RainbowKitCustomConnectButton = () => {
                 <li>
                   <button className="menu-item btn-sm !rounded-xl flex gap-3 py-3">
                     <ArrowTopRightOnSquareIcon className="h-6 w-4 ml-2 sm:ml-0" />
-                    <a target="_blank" href={blockExplorerAddressLink} rel="noopener noreferrer">View on Block Explorer</a>
+                    <a target="_blank" href={blockExplorerAddressLink} rel="noopener noreferrer">
+                      View on Block Explorer
+                    </a>
                   </button>
                 </li>
                 <li>
-                  <button className="menu-item text-error btn-sm !rounded-xl flex gap-3 py-3" onClick={() => disconnect()}>
+                  <button
+                    className="menu-item text-error btn-sm !rounded-xl flex gap-3 py-3"
+                    onClick={() => disconnect()}
+                  >
                     <ArrowLeftOnRectangleIcon className="h-6 w-4 ml-2 sm:ml-0" />
                     <span>Disconnect</span>
                   </button>
