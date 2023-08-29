@@ -66,7 +66,7 @@ const Home = () => {
           Reputation for any address, forged by community, in one place, for all to see.
         </div>
         <div className="relative w-full max-w-md">
-          <div className="mt-1 relative rounded-md shadow-sm" style={{padding: 10}}>
+          <div className="mt-1 relative rounded-md shadow-sm" style={{ padding: 10 }}>
             <input
               key={renderKey}
               type="text"
@@ -80,8 +80,8 @@ const Home = () => {
               style={{
                 backgroundColor: "white",
                 color: "black",
-                fontSize: "1.2em", 
-                fontWeight: "bold", 
+                fontSize: "1.2em",
+                fontWeight: "bold",
                 opacity: 0.7,
               }}
             />

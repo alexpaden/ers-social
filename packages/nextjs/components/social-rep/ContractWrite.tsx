@@ -128,10 +128,24 @@ const ContractWrite = ({ address }: { address: string }) => {
     setProgress(0);
   };
 
+  const handleTouchStart = (e: React.TouchEvent<HTMLButtonElement>) => {
+    e.preventDefault();
+    handleMouseDown(e as any);
+  };
+
+  const handleTouchEnd = (e: React.TouchEvent<HTMLButtonElement>) => {
+    e.preventDefault();
+    handleMouseUp(e as any);
+  };
+
+  const handleTouchCancel = () => {
+    handleMouseLeave();
+  };
+
   return (
     <div className="mt-4 p-4 border rounded-lg">
       <form className="space-y-4" onSubmit={handleSubmit}>
-        <div className="flex justify-center">
+        <div className="flex flex-col sm:flex-row justify-center overflow-x-auto">
           {ratings.map((rating, index) => (
             <div
               key={index}
@@ -151,11 +165,10 @@ const ContractWrite = ({ address }: { address: string }) => {
               onClick={e => handleScoreClick(e, rating.value)}
             >
               <div
-                className="absolute"
+                className="absolute sm:text-6xl text-3xl"
                 style={{
                   top: "50%",
                   left: "50%",
-                  fontSize: "6.25rem",
                   opacity: 0.2,
                   zIndex: 1,
                   pointerEvents: "none",
@@ -172,8 +185,8 @@ const ContractWrite = ({ address }: { address: string }) => {
             </div>
           ))}
         </div>
-        <div className="flex justify-between items-center border rounded-sm">
-          <div className="relative flex flex-col items-center justify-center w-3/12 p-4">
+        <div className="flex flex-col sm:flex-row justify-between items-center border rounded-sm">
+          <div className="relative flex flex-col items-center justify-center w-full sm:w-3/12 p-4">
             <button
               type="button"
               onClick={() => setShowTagDropdown(!showTagDropdown)}
@@ -204,7 +217,6 @@ const ContractWrite = ({ address }: { address: string }) => {
                     {option.label}
                   </div>
                 ))}
-
                 <div className="p-2">
                   <input
                     type="text"
@@ -221,7 +233,7 @@ const ContractWrite = ({ address }: { address: string }) => {
               </div>
             )}
           </div>
-          <div className="flex flex-col w-9/12 p-4">
+          <div className="flex flex-col w-full sm:w-9/12 p-4">
             <textarea
               name="comment"
               placeholder="Commentary"
@@ -233,21 +245,35 @@ const ContractWrite = ({ address }: { address: string }) => {
                 fontSize: "1.2rem",
                 fontWeight: "bold",
                 color: "#333",
+                backgroundColor: "#f2f2f2",
               }}
               onChange={handleChange}
               value={formData.comment}
             ></textarea>
           </div>
         </div>
-        <div className="flex justify-center mt-4 ">
+        <div className="flex justify-center mt-4">
           <button
             type="button"
-            className="btn flex items-center bg-white border border-gray-600 px-8 py-2 relative "
+            className="btn flex items-center relative"
+            style={{
+              background: "linear-gradient(to right, red, orange)",
+              border: "none",
+              boxShadow: "none",
+              color: "black",
+            }}
             onMouseDown={handleMouseDown}
             onMouseUp={handleMouseUp}
             onMouseLeave={handleMouseLeave}
+            onTouchStart={handleTouchStart}
+            onTouchEnd={handleTouchEnd}
+            onTouchCancel={handleTouchCancel}
           >
-            <span className="mr-2 ">🕒</span> Mint (press and hold)
+            <span className="mr-2" style={{ color: "black" }}>
+              🕒
+            </span>{" "}
+            {/* Font color set to black */}
+            Mint (press and hold)
             <div
               className="absolute left-0 bottom-0 bg-gray-600"
               style={{ width: `${progress}%`, height: "4px" }}

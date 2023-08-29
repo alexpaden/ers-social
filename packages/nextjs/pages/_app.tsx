@@ -8,11 +8,11 @@ import { AddressProvider } from "~~/components/AddressContext";
 import { Footer } from "~~/components/Footer";
 import { Header } from "~~/components/Header";
 import { BlockieAvatar } from "~~/components/scaffold-eth";
+import DiamondIcon from "~~/components/social-rep/assets/DiamondIcon";
+import HareIcon from "~~/components/social-rep/assets/HareIcon";
 import { wagmiConfig } from "~~/services/web3/wagmiConfig";
 import { appChains } from "~~/services/web3/wagmiConnectors";
 import "~~/styles/globals.css";
-import DiamondIcon from "~~/components/social-rep/assets/DiamondIcon";
-import HareIcon from "~~/components/social-rep/assets/HareIcon";
 
 const ScaffoldEthApp = ({ Component, pageProps }: AppProps) => {
   return (

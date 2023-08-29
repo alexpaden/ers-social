@@ -64,14 +64,16 @@ const AddressInputComponent = () => {
           </div>
         )}
 
-<input
-  className={`focus:outline-none focus:bg-transparent focus:text-gray-400 h-[2.2rem] min-h-[2.2rem] px-4 border w-auto font-medium placeholder:text-accent/50 text-gray-400 rounded-0 bg-white ${window.innerWidth <= 768 ? 'mobile-styles' : ''}`}
-  placeholder="Search for ENS or Address"
-  value={value}
-  onChange={handleChange}
-  onKeyDown={handleKeyDown}
-  autoComplete="off"
-/>
+        <input
+          className={`focus:outline-none focus:bg-transparent focus:text-gray-400 h-[2.2rem] min-h-[2.2rem] px-4 border w-auto font-medium placeholder:text-accent/50 text-gray-400 rounded-0 bg-white ${
+            window.innerWidth <= 768 ? "mobile-styles" : ""
+          }`}
+          placeholder="Search for ENS or Address"
+          value={value}
+          onChange={handleChange}
+          onKeyDown={handleKeyDown}
+          autoComplete="off"
+        />
 
         {value && (
           <div className="flex items-center">
