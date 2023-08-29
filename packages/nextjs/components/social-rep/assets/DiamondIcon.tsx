@@ -4,7 +4,7 @@ export const DiamondIcon = ({ className }: { className: string }) => {
   return (
     <svg
       className={`${className} animate-pulse`}
-      style={{ transform: "scaleX(-1)" }}  // Add this line to flip horizontally
+      style={{ transform: "scaleX(-1)" }} // Add this line to flip horizontally
       width="118"
       height="162"
       viewBox="0 0 118 162"

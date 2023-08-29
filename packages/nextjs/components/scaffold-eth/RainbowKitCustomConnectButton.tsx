@@ -1,15 +1,10 @@
-import { useState } from "react";
 import { ConnectButton } from "@rainbow-me/rainbowkit";
-import CopyToClipboard from "react-copy-to-clipboard";
 import { useDisconnect, useSwitchNetwork } from "wagmi";
 import {
   ArrowLeftOnRectangleIcon,
   ArrowTopRightOnSquareIcon,
   ArrowsRightLeftIcon,
-  CheckCircleIcon,
   ChevronDownIcon,
-  DocumentDuplicateIcon,
-  QrCodeIcon,
 } from "@heroicons/react/24/outline";
 import { BlockieAvatar } from "~~/components/scaffold-eth";
 import { useAutoConnect } from "~~/hooks/scaffold-eth";
@@ -20,7 +15,6 @@ export const RainbowKitCustomConnectButton = () => {
   const configuredNetwork = getTargetNetwork();
   const { disconnect } = useDisconnect();
   const { switchNetwork } = useSwitchNetwork();
-  const [addressCopied, setAddressCopied] = useState(false);
 
   return (
     <ConnectButton.Custom>
@@ -40,7 +34,7 @@ export const RainbowKitCustomConnectButton = () => {
 
         if (chain.unsupported || chain.id !== configuredNetwork.id) {
           return (
-            <div className='dropdown dropdown-end'>
+            <div className="dropdown dropdown-end">
               <label tabIndex={0} className="btn btn-error btn-sm dropdown-toggle gap-1">
                 <span>Wrong network</span>
                 <ChevronDownIcon className="h-6 w-4 ml-2 sm:ml-0" />
@@ -71,7 +65,7 @@ export const RainbowKitCustomConnectButton = () => {
 
         return (
           <div className={`connected-button-gradient px-2 flex justify-end items-center`}>
-            <div className={`dropdown ${connected ? 'dropdown-end' : ''} sm:bottom-0 md:top-0`}>
+            <div className={`dropdown ${connected ? "dropdown-end" : ""} sm:bottom-0 md:top-0`}>
               <label tabIndex={0} className="connected-button-gradient">
                 <BlockieAvatar address={account.address} size={24} ensImage={account.ensAvatar} />
                 <span className="ml-2 mr-1">{account.displayName}</span>

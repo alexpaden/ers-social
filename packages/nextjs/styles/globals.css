@@ -46,7 +46,6 @@ p {
   background: linear-gradient(to right, red, rgb(224, 7, 224), rgba(0, 0, 255, 0.623), green);
   -webkit-background-clip: text;
   color: transparent;
-  font-size: 2.5em;
 }
 
 .gradient-title {
@@ -120,7 +119,7 @@ p {
 }
 
 .responsive-text {
-  font-size: 10rem; /* Default size */
+  font-size: 8rem; /* Default size */
 }
 
 /* Media query for smaller screens */
@@ -205,7 +204,7 @@ p {
   padding-top: 25%; /* Mobile */
 }
 
-@media (min-width: 768px) { 
+@media (min-width: 768px) {
   .pt-dynamic {
     padding-top: 10%; /* Desktop */
   }

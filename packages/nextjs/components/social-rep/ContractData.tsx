@@ -107,7 +107,7 @@ export const ContractData = ({ address }: { address: string }) => {
         </div>
 
         <ul>
-          {joinedData.map((item, index) => (
+          {[...joinedData].reverse().map((item, index) => (
             <ReputationData key={index} item={item} address={address} showGiven={showGiven} />
           ))}
         </ul>

@@ -5,7 +5,7 @@ import NextNProgress from "nextjs-progressbar";
 import { Toaster } from "react-hot-toast";
 import { WagmiConfig } from "wagmi";
 import { AddressProvider } from "~~/components/AddressContext";
-import { Footer } from "~~/components/Footer";
+//import { Footer } from "~~/components/Footer";
 import { Header } from "~~/components/Header";
 import { BlockieAvatar } from "~~/components/scaffold-eth";
 import DiamondIcon from "~~/components/social-rep/assets/DiamondIcon";
@@ -31,7 +31,6 @@ const ScaffoldEthApp = ({ Component, pageProps }: AppProps) => {
               <HareIcon className="absolute left-0 bottom-0 z-10" />
               <Component {...pageProps} />
             </main>
-
           </div>
         </AddressProvider>
         <Toaster />
