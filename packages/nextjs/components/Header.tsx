@@ -48,8 +48,6 @@ export const Header = () => {
         </div>
       </div>
 
-      <div className="flex-grow">{router.pathname !== "/" && <AddressInputComponent />}</div>
-      <div className="flex-grow"></div>
       <div className="flex items-center relative" ref={burgerMenuRef}>
         <label
           tabIndex={0}

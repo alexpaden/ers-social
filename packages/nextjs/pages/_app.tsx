@@ -11,6 +11,8 @@ import { BlockieAvatar } from "~~/components/scaffold-eth";
 import { wagmiConfig } from "~~/services/web3/wagmiConfig";
 import { appChains } from "~~/services/web3/wagmiConnectors";
 import "~~/styles/globals.css";
+import DiamondIcon from "~~/components/social-rep/assets/DiamondIcon";
+import HareIcon from "~~/components/social-rep/assets/HareIcon";
 
 const ScaffoldEthApp = ({ Component, pageProps }: AppProps) => {
   return (
@@ -25,6 +27,8 @@ const ScaffoldEthApp = ({ Component, pageProps }: AppProps) => {
             {/* Gradient background */}
             <Header />
             <main className="relative flex flex-col flex-1" style={{ paddingBottom: "0" }}>
+              <DiamondIcon className="absolute top-32 left-0 z-10" />
+              <HareIcon className="absolute right-0 bottom-0 z-10" />
               <Component {...pageProps} />
             </main>
             <Footer />

@@ -94,6 +94,10 @@ p {
   font-size: 0.55rem;
 }
 
+.text-xxxs {
+  font-size: 0.4rem;
+}
+
 .gradient-button {
   background: linear-gradient(to right, red, orange); /* Apply gradient */
   border: none;
@@ -102,3 +106,66 @@ p {
 .content-box-padding {
   box-sizing: content-box;
 }
+
+.responsive-text {
+  font-size: 8rem; /* Default size */
+}
+
+/* Media query for smaller screens */
+@media (max-width: 768px) {
+  .responsive-text {
+    font-size: 4rem; /* Smaller size for mobile screens */
+  }
+}
+
+.z-10 {
+  z-index: 10;
+}
+
+/* Z-index for components that should be above SVG logos */
+.z-20 {
+  z-index: 20;
+}
+
+.z-30 {
+  z-index: 30;
+}
+
+/* Z-index for header */
+.header-z {
+  z-index: 30;
+}
+
+/* Z-index for main content */
+.main-content-z {
+  z-index: 25;
+}
+
+.content-box {
+  max-width: 100%; /* Set maximum width */
+  overflow-x: auto; /* Handle horizontal overflow */
+}
+
+.mobile-styles {
+  height: 1.5rem;
+  min-height: 1.5rem;
+}
+
+@media (max-width: 640px) {
+  .text-xxs {
+    font-size: 0.6rem;
+  }
+  .text-2xl {
+    font-size: 1.2rem;
+  }
+  .text-4xl {
+    font-size: 2rem;
+  }
+  .text-lg {
+    font-size: 1rem;
+  }
+  .sm\:mr-4 {
+    margin-right: 0 !important;
+  }
+}
+

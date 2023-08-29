@@ -1,6 +1,4 @@
 import { useRouter } from "next/router";
-import DiamondIcon from "../components/social-rep/assets/DiamondIcon";
-import { HareIcon } from "../components/social-rep/assets/HareIcon";
 import type { NextPage } from "next";
 import { MetaHeader } from "~~/components/MetaHeader";
 import { ContractData } from "~~/components/social-rep/ContractData";
@@ -20,10 +18,9 @@ const SocialUI: NextPage = () => {
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link href="https://fonts.googleapis.com/css2?family=Bai+Jamjuree&display=swap" rel="stylesheet" />
       </MetaHeader>
-      <div className="grid flex-grow" data-theme="exampleUi" style={{ background: "transparent" }}>
-        <DiamondIcon className="absolute top-32 left-0 z-0" />
-        <HareIcon className="absolute right-0 bottom-24" />
+      <div className="grid flex-grow z-20" style={{ background: "transparent" }}>
         <div
+          className="content-box"
           style={{
             display: "flex",
             flexDirection: "column",
