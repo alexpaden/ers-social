@@ -11,10 +11,6 @@
     {
       "src": "/(.*)",
       "dest": "packages/nextjs/$1"
-    },
-    {
-      "src": "/.*",
-      "dest": "packages/nextjs/index.html"
     }
   ]
 }

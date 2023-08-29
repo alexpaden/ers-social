@@ -59,10 +59,10 @@ const Home = () => {
       </MetaHeader>
 
       <main className="flex flex-col items-center justify-center w-full flex-1 text-center">
-        <h1 className="text-8xl font-extrabold mb-4 gradient-text responsive-text z-20" style={{ lineHeight: 1.5 }}>
+        <h1 className="font-extrabold gradient-cta responsive-text z-20" style={{ lineHeight: 1.5 }}>
           Reputation for all
         </h1>
-        <div className="text-lg mb-8 font-semibold description-darker">
+        <div className="text-xl mb-8 font-semibold description-darker">
           Reputation for any address, forged by community, in one place, for all to see.
         </div>
         <div className="relative w-full max-w-md">

@@ -257,9 +257,10 @@ const ContractWrite = ({ address }: { address: string }) => {
             type="button"
             className="btn flex items-center relative"
             style={{
-              background: "linear-gradient(to right, red, orange)",
+              background: "whitesmoke",
               border: "none",
               boxShadow: "none",
+              fontWeight: "bold",
               color: "black",
             }}
             onMouseDown={handleMouseDown}
