@@ -52,13 +52,13 @@ const Home = () => {
     }
   };
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen">
+    <div className="flex flex-col items-center justify-center overflow-y-hidden">
       <MetaHeader title="reputation.blue" description="Social Reputation by ERS.blue (Ethereum Reputation Service)">
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link href="https://fonts.googleapis.com/css2?family=Bai+Jamjuree&display=swap" rel="stylesheet" />
       </MetaHeader>
 
-      <main className="flex flex-col items-center justify-center w-full flex-1 text-center">
+      <main className="flex flex-col items-center justify-center w-full text-center pt-dynamic">
         <h1 className="font-extrabold gradient-cta responsive-text z-20" style={{ lineHeight: 1.5 }}>
           Reputation for all
         </h1>

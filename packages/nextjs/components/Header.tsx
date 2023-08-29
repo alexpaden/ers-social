@@ -39,7 +39,10 @@ export const Header = () => {
   return (
     <div className="relative sticky lg:static top-0 navbar bg-transparent min-h-0 flex-shrink-0 flex justify-between z-40 px-0 sm:px-2">
       {/* ERS+logo conditionally shown based on route */}
-      <div className={`flex items-center ml-4 cursor-pointer ${router.pathname !== '/' ? 'hidden lg:flex' : 'flex'}`} onClick={navigateToHome}>
+      <div
+        className={`flex items-center ml-4 cursor-pointer ${router.pathname !== "/" ? "hidden lg:flex" : "flex"}`}
+        onClick={navigateToHome}
+      >
         <div className="flex relative w-10 h-10 logo-size">
           <img alt="SE2 logo" className="cursor-pointer" src="/logo.svg" style={{ width: 37 }} />
         </div>
@@ -59,33 +62,32 @@ export const Header = () => {
           >
             <Bars3Icon className="h-1/2" />
           </label>
-            {isDrawerOpen && (
-              <ul
-                tabIndex={0}
-                className="absolute right-full mt-3 p-2 shadow bg-base-100 rounded-box w-[200px]"
-                onClick={() => {
-                  setIsDrawerOpen(false);
-                }}
-              >
-                <li>
-                  <NavLink href="/">Home</NavLink>
-                </li>
-                <li>
-                  <NavLink href="/debug">
-                    <BugAntIcon className="h-4 w-4" />
-                    Debug Contract
-                  </NavLink>
-                </li>
-              </ul>
-            )}
-            
+          {isDrawerOpen && (
+            <ul
+              tabIndex={0}
+              className="absolute right-full mt-3 p-2 shadow bg-base-100 rounded-box w-[200px]"
+              onClick={() => {
+                setIsDrawerOpen(false);
+              }}
+            >
+              <li>
+                <NavLink href="/">Home</NavLink>
+              </li>
+              <li>
+                <NavLink href="/debug">
+                  <BugAntIcon className="h-4 w-4" />
+                  Debug Contract
+                </NavLink>
+              </li>
+            </ul>
+          )}
         </div>
-        
+
         {/* Button as-is for desktop */}
         <div className="hidden lg:flex">
           <RainbowKitCustomConnectButton />
         </div>
-        
+
         {/* Floating button for mobile */}
         <div className="lg:hidden fixed bottom-4 left-1/2 transform -translate-x-1/2 z-40">
           <RainbowKitCustomConnectButton />
@@ -103,25 +105,24 @@ export const Header = () => {
             <Bars3Icon className="h-1/2" />
           </label>
           {isDrawerOpen && (
-  <ul
-    tabIndex={0}
-    className="absolute right-full mt-3 p-2 shadow bg-base-100 rounded-box w-[200px]"
-    onClick={() => {
-      setIsDrawerOpen(false);
-    }}
-  >
-    <li>
-      <NavLink href="/">Home</NavLink>
-    </li>
-    <li>
-      <NavLink href="/debug">
-        <BugAntIcon className="h-4 w-4" />
-        Debug Contract
-      </NavLink>
-    </li>
-  </ul>
-)}
-
+            <ul
+              tabIndex={0}
+              className="absolute right-full mt-3 p-2 shadow bg-base-100 rounded-box w-[200px]"
+              onClick={() => {
+                setIsDrawerOpen(false);
+              }}
+            >
+              <li>
+                <NavLink href="/">Home</NavLink>
+              </li>
+              <li>
+                <NavLink href="/debug">
+                  <BugAntIcon className="h-4 w-4" />
+                  Debug Contract
+                </NavLink>
+              </li>
+            </ul>
+          )}
         </div>
       </div>
     </div>

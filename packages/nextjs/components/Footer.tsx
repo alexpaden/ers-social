@@ -1,8 +1,3 @@
-import { HeartIcon } from "@heroicons/react/24/outline";
-
-/**
- * Site footer
- */
 export const Footer = () => {
   return (
     <div className="min-h-0 p-5 mb-11 lg:mb-0">

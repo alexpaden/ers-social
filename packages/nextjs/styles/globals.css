@@ -37,13 +37,13 @@ p {
 }
 
 .gradient-text {
-  background: linear-gradient(to right,red, rgb(224, 7, 224), rgba(0, 0, 255, 0.623), green);
+  background: linear-gradient(to right, red, rgb(224, 7, 224), rgba(0, 0, 255, 0.623), green);
   -webkit-background-clip: text;
   color: transparent;
 }
 
 .gradient-cta {
-  background: linear-gradient(to right,red, rgb(224, 7, 224), rgba(0, 0, 255, 0.623), green);
+  background: linear-gradient(to right, red, rgb(224, 7, 224), rgba(0, 0, 255, 0.623), green);
   -webkit-background-clip: text;
   color: transparent;
   font-size: 2.5em;
@@ -90,11 +90,6 @@ p {
   .connected-button-gradient {
     padding: 0.5rem 2rem; /* Desktop */
   }
-}
-
-
-.dropdown-content {
-  min-width: 200px;
 }
 
 ::placeholder {
@@ -187,5 +182,31 @@ p {
   }
   .sm\:mr-4 {
     margin-right: 0 !important;
+  }
+}
+
+/* Dropdown styles for mobile */
+@media (max-width: 640px) {
+  .dropdown-content {
+    min-width: 200px;
+    bottom: 100%;
+  }
+}
+
+/* Dropdown styles for desktop */
+@media (min-width: 641px) {
+  .dropdown-content {
+    min-width: 200px;
+    top: 100%;
+  }
+}
+
+.pt-dynamic {
+  padding-top: 25%; /* Mobile */
+}
+
+@media (min-width: 768px) { 
+  .pt-dynamic {
+    padding-top: 10%; /* Desktop */
   }
 }
