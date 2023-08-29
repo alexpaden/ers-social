@@ -72,7 +72,7 @@ export const ContractData = ({ address }: { address: string }) => {
     : joinComments(receivedReputationData || [], commentsFromAPI);
 
   return (
-    <div className="p-4 sm:p-[5%] w-full mx-auto my-10 relative">
+    <div className="p-4 sm:p-[5%] w-full mx-auto relative">
       <div className="bg-white bg-opacity-70 rounded-2xl shadow-lg px-5 py-4 w-full relative z-1">
         <div className="flex flex-col sm:flex-row flex-wrap justify-between items-center mb-4">
           <div className="flex flex-col items-center bg-gray-200 p-2 rounded-lg shadow gradient-button mb-4 sm:mb-0">

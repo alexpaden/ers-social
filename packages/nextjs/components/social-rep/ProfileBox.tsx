@@ -14,8 +14,8 @@ const ProfileBox = ({ address }: { address: string }) => {
   };
 
   return (
-    <div style={containerStyle} className="p-[5%] w-full mx-auto my-10 relative">
-      <div className="bg-white p-4 rounded-lg shadow-lg z-10 relative">
+    <div style={containerStyle} className="p-[5%] w-full mx-auto relative">
+      <div className="bg-white p-4 bg-opacity-850 rounded-lg shadow-lg z-10 relative">
         <div className="flex justify-between items-center">
           <div className="flex items-center">
             <img src="https://via.placeholder.com/50" alt="Profile" className="rounded-md" />

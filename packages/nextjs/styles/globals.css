@@ -54,7 +54,7 @@ p {
   opacity: 0.5;
   -webkit-background-clip: text;
   color: transparent;
-  font-size: 3.5em;
+  font-size: 1.5em;
 }
 
 .logo-size {
@@ -65,7 +65,7 @@ p {
 .connect-button-gradient {
   width: 150px;
   height: 50px;
-  background: linear-gradient(to right,red, rgb(224, 7, 224), rgba(0, 0, 255, 0.623), green);
+  background: blue;
   color: white;
   border: none;
   border-radius: 8px; /* Rounded corners */
@@ -76,13 +76,22 @@ p {
 .connected-button-gradient {
   display: flex;
   align-items: center;
-  background: linear-gradient(to right,red, rgb(224, 7, 224), rgba(0, 0, 255, 0.623), green);
+  background: rgb(98, 71, 221);
+  padding: 0.15rem 1rem; /* Mobile */
   border: none !important;
   box-shadow: none !important;
   outline: none !important;
-  padding: 0.5rem 1rem;
   border-radius: 8px;
+  opacity: 0.9;
 }
+
+/* Media query for desktop */
+@media screen and (min-width: 1024px) {
+  .connected-button-gradient {
+    padding: 0.5rem 2rem; /* Desktop */
+  }
+}
+
 
 .dropdown-content {
   min-width: 200px;
@@ -137,6 +146,10 @@ p {
 
 .z-30 {
   z-index: 30;
+}
+
+.z-40 {
+  z-index: 40;
 }
 
 /* Z-index for header */
