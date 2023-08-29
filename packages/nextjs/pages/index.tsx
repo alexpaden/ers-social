@@ -63,7 +63,7 @@ const Home = () => {
           Reputation for anyone
         </h1>
         <div className="text-lg mb-8 font-semibold description-darker">
-          Reputation forged onchain, a community curated history, for the professionally social.
+          Reputation forged by community, available across web3, for the professionally social.
         </div>
         <div className="relative w-full max-w-md">
           <div className="mt-1 relative rounded-md shadow-sm">

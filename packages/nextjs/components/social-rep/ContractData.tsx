@@ -106,12 +106,12 @@ export const ContractData = ({ address }: { address: string }) => {
       <div className="bg-white bg-opacity-70 rounded-2xl shadow-lg px-5 py-4 w-full relative z-1">
         <div className="flex flex-wrap justify-between items-center mb-4">
           <div className="flex items-center justify-between bg-gray-200 p-4 rounded-lg shadow gradient-button">
-            <div className="text-lg font-semibold text-gray-700 pr-2">...{address.slice(-12)}'s Total Score is</div>
-            <div className="flex items-center">
-              <div className="text-4xl font-bold text-right text-blue-500">{totalScore?.toString() || "0"}</div>
+            <div className="text-lg font-semibold text-gray-700 pr-2">{address}'s Total Score is</div>
+            <div className="flex items-center ">
+              <div className="text-4xl font-bold text-right text-gray-700">{totalScore?.toString() || "0"}</div>
             </div>
           </div>
-          <div className="flex flex-col w-1/2 items-end">
+          <div className="flex flex-col w-1/4 items-end">
             {" "}
             {/* Right-align the buttons */}
             <div className="btn-group mb-2">

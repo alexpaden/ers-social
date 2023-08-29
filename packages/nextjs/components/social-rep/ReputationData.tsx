@@ -31,38 +31,30 @@ const ReputationData: React.FC<ReputationDataProps> = ({ item, address, showGive
 
   return (
     <li className="bg-gray-100 p-4 rounded-lg shadow mb-4 flex flex-col" style={{ height: "200px" }}>
-      {/* Second Row: Score and Comment */}
       <div className="flex rounded p-2" style={{ height: "175px" }}>
-        {/* First Row: Tag, Sender, Receiver, and Time */}
-        <div className="w-1/4 flex flex-col items-center justify-center relative rounded-lg p-4">
-          {/* Background with vibrant gradient and reduced opacity */}
-          <div className="absolute inset-0 bg-gradient-to-r from-purple-400 via-pink-500 to-red-500 opacity-40 rounded-lg content-box-padding"></div>
-
-          {/* Actual content */}
+        <div className="w-1/3 flex flex-col items-center justify-center relative rounded-lg p-4">
+          <div className="absolute inset-0 rounded-lg content-box-padding">
           <div className="relative z-10">
-            {/* Timestamp */}
-            <div className="mb-2 rounded p-2 shadow-lg">
-              <div className="text-xxs text-white font-mono">
+            <div className="mb-2 rounded p-2 shadow-lg w-3/4">
+              <div className="text-xxs  font-mono">
                 {datePart} - {timePart}
               </div>
             </div>
-
-            {/* Tag */}
-            <div className="self-center mb-2 rounded p-2 shadow-lg">
-              <div className="text-2xl text-white font-extrabold tracking-wider">{item.tag}</div>
+            <div className="w-3/4 self-center mb-2 rounded p-2 shadow-lg">
+              <div className="text-2xl font-extrabold tracking-wider">{item.tag}</div>
             </div>
-
-            {/* Score */}
-            <div className="self-center rounded p-4 shadow-2xl">
-              <span className="text-4xl text-yellow-300 font-mono font-extrabold tracking-wider">
+            <div className="w-1/3 self-center rounded p-4 shadow-2xl ">
+              <span className="text-4xl font-mono font-extrabold tracking-wider">
                 {score > 0 ? "+" : ""}
                 {score.toString()}
               </span>
             </div>
           </div>
+          </div>
         </div>
 
-        {/* Comment */}
+
+        {/* Comment & Sender */}
         <div className="w-3/4 flex flex-col">
           <div className="text-xs text-gray-400 mb-2">
             {showGiven ? `Receiver: ${item.otherAddress}` : `Sender: ${item.otherAddress}`}
