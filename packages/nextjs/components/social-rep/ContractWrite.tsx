@@ -42,8 +42,10 @@ const ContractWrite = ({ address }: { address: string }) => {
   useEffect(() => {
     function handleClickOutside(event: Event) {
       const target = event.target as Node;
-      if (tagDropdownRef.current && tagDropdownRef.current.contains(target)) {
-        setShowTagDropdown(false);
+      if (tagDropdownRef.current) {
+        if (!tagDropdownRef.current.contains(target)) {
+          setShowTagDropdown(false);
+        }
       }
     }
 
@@ -128,15 +130,6 @@ const ContractWrite = ({ address }: { address: string }) => {
 
   return (
     <div className="mt-4 p-4 border rounded-lg">
-      <div className="title-div">
-        <h3 className="text-xl font-semibold mb-1 text-center">Set Reputation Options</h3>
-        <div className="mt-1 flex gap-2 items-start text-center justify-center">
-          <div className="badge badge-warning text-xs font-normal" style={{ fontSize: "0.6rem" }}>
-            Cost: 0.01 ETH + Gas
-          </div>
-        </div>
-        <hr className="my-2" />
-      </div>
       <form className="space-y-4" onSubmit={handleSubmit}>
         <div className="flex justify-center">
           {ratings.map((rating, index) => (
