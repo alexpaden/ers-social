@@ -49,36 +49,6 @@ export const ContractData = ({ address }: { address: string }) => {
     args: [address],
   });
 
-  const formatScore = (score: bigint, timestamp: Date) => {
-    const dateObject = timestamp;
-    const datePart = dateObject.toLocaleDateString("en-US", {
-      weekday: "short",
-      year: "numeric",
-      month: "short",
-      day: "numeric",
-    });
-    const timePart = dateObject.toLocaleTimeString("en-US", {
-      hour: "2-digit",
-      minute: "2-digit",
-      second: "2-digit",
-    });
-    return (
-      <div className="flex flex-col items-center justify-center h-full">
-        <span className="flex items-center">
-          <span className="text-4xl font-mono font-bold">
-            {score > 0 ? "+" : ""}
-            {score.toString()}
-          </span>
-        </span>
-        <div className="text-xs rounded-full px-2 py-1 mt-1 flex-grow text-center bg-gray-200">
-          <span className="font-serif text-sm text-gray-700 opacity-80">{datePart}</span>
-          <br />
-          <span className="font-mono text-xxs text-gray-600 opacity-60">{timePart}</span>
-        </div>
-      </div>
-    );
-  };
-
   useEffect(() => {
     if (givenReputationData && receivedReputationData) {
       const newCommentHashes = [...givenReputationData, ...receivedReputationData].map(item =>

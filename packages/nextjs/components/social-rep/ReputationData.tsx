@@ -14,7 +14,7 @@ interface ReputationDataProps {
   showGiven: boolean;
 }
 
-const ReputationData: React.FC<ReputationDataProps> = ({ item, address, showGiven }) => {
+const ReputationData: React.FC<ReputationDataProps> = ({ item, showGiven }) => {
   const score = item.score;
   const timestamp = new Date(parseInt(item.timestamp || "0") * 1000);
   const datePart = timestamp.toLocaleDateString("en-US", {
