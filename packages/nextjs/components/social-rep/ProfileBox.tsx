@@ -26,10 +26,10 @@ const ProfileBox = ({ address }: { address: string }) => {
           </div>
           <button
             onClick={toggleDropdown}
-            className="flex items-center bg-gray-100 text-gray-700 font-bold border border-gray-600 px-4 py-2"
+            className="flex items-center bg-gray-100 text-gray-700 font-bold border border-gray-600 px-4 py-2 gradient-button"
             style={{ borderRadius: "0" }}
           >
-            Forge New Reputation
+            Mint New Rep
             <div className="border-l-2 border-gray-600 h-4 mx-2"></div>
             <span>{showDropdown ? "▼" : "◄"}</span>
           </button>

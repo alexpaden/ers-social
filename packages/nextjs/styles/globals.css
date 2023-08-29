@@ -89,3 +89,16 @@ p {
 .underline-text {
   text-decoration: underline !important;
 }
+
+.text-xxs {
+  font-size: 0.5rem;
+}
+
+.gradient-button {
+  background: linear-gradient(to right, red, orange); /* Apply gradient */
+  border: none;
+}
+
+.content-box-padding {
+  box-sizing: content-box;
+}

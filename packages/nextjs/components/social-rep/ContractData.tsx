@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import ReputationData from "./ReputationData";
 import axios from "axios";
 import { useScaffoldContractRead } from "~~/hooks/scaffold-eth";
 
@@ -27,7 +28,7 @@ const useFetchCommentsFromAPI = (commentHashes: string[]) => {
 
 export const ContractData = ({ address }: { address: string }) => {
   //const { address } = useAccount();
-  const [showGiven, setShowGiven] = useState(true);
+  const [showGiven, setShowGiven] = useState(false);
   const [commentHashes, setCommentHashes] = useState<string[]>([]);
 
   const { data: givenReputationData } = useScaffoldContractRead({
@@ -48,17 +49,35 @@ export const ContractData = ({ address }: { address: string }) => {
     args: [address],
   });
 
-  const formatScore = (score: bigint, tag: string) => (
-    <div className="flex flex-col items-center justify-center h-full">
-      <span className="flex items-center">
-        <span className="text-4xl font-mono font-bold">
-          {score > 0 ? "+" : ""}
-          {score.toString()}
+  const formatScore = (score: bigint, timestamp: Date) => {
+    const dateObject = timestamp;
+    const datePart = dateObject.toLocaleDateString("en-US", {
+      weekday: "short",
+      year: "numeric",
+      month: "short",
+      day: "numeric",
+    });
+    const timePart = dateObject.toLocaleTimeString("en-US", {
+      hour: "2-digit",
+      minute: "2-digit",
+      second: "2-digit",
+    });
+    return (
+      <div className="flex flex-col items-center justify-center h-full">
+        <span className="flex items-center">
+          <span className="text-4xl font-mono font-bold">
+            {score > 0 ? "+" : ""}
+            {score.toString()}
+          </span>
         </span>
-      </span>
-      <div className="text-xs rounded-full px-2 py-1 mt-1 truncate w-16 text-center">{tag}</div>
-    </div>
-  );
+        <div className="text-xs rounded-full px-2 py-1 mt-1 flex-grow text-center bg-gray-200">
+          <span className="font-serif text-sm text-gray-700 opacity-80">{datePart}</span>
+          <br />
+          <span className="font-mono text-xxs text-gray-600 opacity-60">{timePart}</span>
+        </div>
+      </div>
+    );
+  };
 
   useEffect(() => {
     if (givenReputationData && receivedReputationData) {
@@ -83,38 +102,40 @@ export const ContractData = ({ address }: { address: string }) => {
     : joinComments(receivedReputationData || [], commentsFromAPI);
 
   return (
-    <div className="flex flex-col justify-center items-center py-10 px-5 sm:px-0 lg:py-auto max-w-[100vw]">
-      <div className="max-w-2xl bg-white bg-opacity-70 rounded-2xl shadow-lg px-5 py-4 w-full relative z-1">
-        <div className="flex justify-between items-center mb-4">
-          <div className="btn-group">
-            <button className={`btn ${showGiven ? "btn-primary" : "btn-outline"}`} onClick={() => setShowGiven(true)}>
-              Given
-            </button>
-            <button className={`btn ${showGiven ? "btn-outline" : "btn-primary"}`} onClick={() => setShowGiven(false)}>
-              Received
-            </button>
+    <div className="p-[5%] w-full mx-auto my-10 relative">
+      <div className="bg-white bg-opacity-70 rounded-2xl shadow-lg px-5 py-4 w-full relative z-1">
+        <div className="flex flex-wrap justify-between items-center mb-4">
+          <div className="flex items-center justify-between bg-gray-200 p-4 rounded-lg shadow gradient-button">
+            <div className="text-lg font-semibold text-gray-700 pr-2">...{address.slice(-12)}'s Total Score is</div>
+            <div className="flex items-center">
+              <div className="text-4xl font-bold text-right text-blue-500">{totalScore?.toString() || "0"}</div>
+            </div>
           </div>
-          <div className="flex">
-            <div className="p-2 py-1 flex items-end">Total Score</div>
-            <div className="text-4xl text-right min-w-[3rem] px-2 py-1 flex justify-end">
-              {totalScore?.toString() || "0"}
+          <div className="flex flex-col w-1/2 items-end">
+            {" "}
+            {/* Right-align the buttons */}
+            <div className="btn-group mb-2">
+              <button
+                style={{ borderRadius: "4px" }}
+                className={`btn ${showGiven ? "btn-outline" : "gradient-button"}`}
+                onClick={() => setShowGiven(false)}
+              >
+                Received
+              </button>
+              <button
+                style={{ borderRadius: "4px" }}
+                className={`btn ${showGiven ? "gradient-button" : "btn-outline"}`}
+                onClick={() => setShowGiven(true)}
+              >
+                Given
+              </button>
             </div>
           </div>
         </div>
-        <h3 className="text-xl font-bold mb-3">{showGiven ? "Given Reputation To:" : "Received Reputation From:"}</h3>
+
         <ul>
           {joinedData.map((item, index) => (
-            <li key={index} className="bg-gray-100 p-4 rounded-lg shadow mb-4">
-              <div className="flex justify-between items-center">
-                <div className="w-1/4">{formatScore(item.score, item.tag)}</div>
-                <div className="text-xs text-gray-400 ml-2 w-3/4">
-                  <div>Sender: {(showGiven ? address : item.otherAddress).slice(-7)}</div>
-                  <div>Receiver: {(showGiven ? item.otherAddress : address).slice(-7)}</div>
-                </div>
-              </div>
-              <hr className="my-2" />
-              <div className="text-sm text-gray-600">{item.comment || "Loading..."}</div>
-            </li>
+            <ReputationData key={index} item={item} address={address} showGiven={showGiven} />
           ))}
         </ul>
       </div>

@@ -239,15 +239,15 @@ const ContractWrite = ({ address }: { address: string }) => {
             ></textarea>
           </div>
         </div>
-        <div className="flex justify-center mt-4">
+        <div className="flex justify-center mt-4 ">
           <button
             type="button"
-            className="btn flex items-center bg-white border border-gray-600 px-8 py-2 relative"
+            className="btn flex items-center bg-white border border-gray-600 px-8 py-2 relative "
             onMouseDown={handleMouseDown}
             onMouseUp={handleMouseUp}
             onMouseLeave={handleMouseLeave}
           >
-            <span className="mr-2">🕒</span> Forge Onchain (press and hold)
+            <span className="mr-2 ">🕒</span> Mint (press and hold)
             <div
               className="absolute left-0 bottom-0 bg-gray-600"
               style={{ width: `${progress}%`, height: "4px" }}
