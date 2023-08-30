@@ -27,33 +27,27 @@ p {
 }
 
 .placeholder-darker::placeholder {
-  color: rgba(0, 0, 0, 0.4); /* 80% opacity black */
+  color: rgba(0, 0, 0, 0.4); /* 60% opacity black */
   font-weight: bold; /* Make it bold */
   font-size: 1.4em; /* Increase font size */
 }
 
 .description-darker {
-  color: rgba(0, 0, 0, 0.6); /* 80% opacity black */
+  color: rgba(22, 21, 21, 0.3); /* 80% opacity black */
+  font-weight: 500;
 }
 
 .gradient-text {
-  background: linear-gradient(to right, red, rgb(224, 7, 224), rgba(0, 0, 255, 0.623), green);
-  -webkit-background-clip: text;
-  color: transparent;
-}
-
-.gradient-cta {
-  background: linear-gradient(to right, red, rgb(224, 7, 224), rgba(0, 0, 255, 0.623), green);
+  background: linear-gradient(to right, rgba(0, 0, 255, 0.72), rgb(0, 128, 255));
   -webkit-background-clip: text;
   color: transparent;
 }
 
 .gradient-title {
-  background: blue;
-  opacity: 0.5;
+  background: linear-gradient(to right, rgba(0, 0, 255, 0.72), rgb(0, 128, 255));
   -webkit-background-clip: text;
   color: transparent;
-  font-size: 1.5em;
+  font-size: 1.25em;
 }
 
 .logo-size {
@@ -119,13 +113,13 @@ p {
 }
 
 .responsive-text {
-  font-size: 8rem; /* Default size */
+  font-size: 3rem; /* Default size */
 }
 
 /* Media query for smaller screens */
 @media (max-width: 768px) {
   .responsive-text {
-    font-size: 4rem; /* Smaller size for mobile screens */
+    font-size: 3rem; /* Smaller size for mobile screens */
   }
 }
 
@@ -206,6 +200,14 @@ p {
 
 @media (min-width: 768px) {
   .pt-dynamic {
-    padding-top: 10%; /* Desktop */
+    padding-top: 20%; /* Desktop */
   }
+}
+
+.sub-cta {
+  font-size: 1.1rem;
+}
+
+.bg-full-gradient {
+  background: linear-gradient(rgba(34, 0, 253, 0.314), rgba(221, 160, 221, 0.503));
 }

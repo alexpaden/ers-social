@@ -59,14 +59,17 @@ const Home = () => {
       </MetaHeader>
 
       <main className="flex flex-col items-center justify-center w-full text-center pt-dynamic">
-        <h1 className="font-extrabold gradient-cta responsive-text z-20" style={{ lineHeight: 1.5 }}>
-          Reputation for all
+        <h1 className="font-bold gradient-cta responsive-text z-20" style={{ lineHeight: 1.5 }}>
+          Your Ξ reputation
         </h1>
-        <div className="text-xl mb-8 font-semibold description-darker">
-          Reputation for any address, forged by community, in one place, for all to see.
+        <div className="sub-cta font-bold mb-8 description-darker">
+          Your identity across web3, a worldly perspective from any address,
+          <br />
+          and your decentralised score.
         </div>
-        <div className="relative w-full max-w-md">
-          <div className="mt-1 relative rounded-md shadow-sm" style={{ padding: 10 }}>
+
+        <div className="relative w-full max-w-md" style={{ margin: 10 }}>
+          <div className="mt-1 relative rounded-md shadow-sm">
             <input
               key={renderKey}
               type="text"
@@ -75,12 +78,12 @@ const Home = () => {
               value={value}
               onChange={handleChange}
               onKeyDown={handleKeyDown}
-              className="focus:ring-indigo-500 focus:border-indigo-500 block w-full pl-12 text-lg h-16 border-gray-300 rounded-md placeholder-darker"
-              placeholder="Find an address or ENS name"
+              className="focus:ring-indigo-500 focus:border-indigo-500 block w-full pl-12 h-20 border-gray-300 rounded-md placeholder-darker"
+              placeholder="Search for an address"
               style={{
                 backgroundColor: "white",
-                color: "black",
-                fontSize: "1.2em",
+                color: "grey",
+                fontSize: "1.5em",
                 fontWeight: "bold",
                 opacity: 0.7,
               }}

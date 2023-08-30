@@ -20,10 +20,7 @@ const ScaffoldEthApp = ({ Component, pageProps }: AppProps) => {
       <NextNProgress />
       <RainbowKitProvider chains={appChains.chains} avatar={BlockieAvatar}>
         <AddressProvider>
-          <div
-            className="flex flex-col min-h-screen"
-            style={{ background: "linear-gradient(to right, lightblue, plum)" }}
-          >
+          <div className="flex flex-col min-h-screen bg-full-gradient">
             {/* Gradient background */}
             <Header />
             <main className="relative flex flex-col flex-1" style={{ paddingBottom: "0" }}>
