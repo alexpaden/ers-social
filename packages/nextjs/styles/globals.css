@@ -47,7 +47,8 @@ p {
   background: linear-gradient(to right, rgba(0, 0, 255, 0.72), rgb(0, 128, 255));
   -webkit-background-clip: text;
   color: transparent;
-  font-size: 1.25em;
+  font-size: 1.3em;
+  transform: scaleY(1.5);
 }
 
 .logo-size {
