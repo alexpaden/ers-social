@@ -1,4 +1,5 @@
 import React, { useCallback, useRef, useState } from "react";
+import Head from "next/head";
 import { useRouter } from "next/router";
 import { Bars3Icon, BugAntIcon } from "@heroicons/react/24/outline";
 import { RainbowKitCustomConnectButton } from "~~/components/scaffold-eth";
@@ -38,6 +39,11 @@ export const Header = () => {
 
   return (
     <div className="relative sticky lg:static top-0 navbar bg-transparent min-h-0 flex-shrink-0 flex justify-between z-40 px-0 sm:px-2">
+      {/* Add this section for PWA */}
+      <Head>
+        <link rel="manifest" href="/manifest.json" />
+        <meta name="theme-color" content="#000000" />
+      </Head>
       {/* ERS+logo conditionally shown based on route */}
       <div
         className={`flex items-center ml-4 cursor-pointer ${router.pathname !== "/" ? "hidden lg:flex" : "flex"}`}

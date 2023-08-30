@@ -205,7 +205,6 @@ p {
   height: 75vh; /* Fills the full viewport height */
 }
 
-
 @media (max-height: 800px) and (orientation: landscape) {
   .pt-dynamic {
     height: 85vh;
@@ -229,7 +228,6 @@ p {
     padding-top: 0;
   }
 }
-
 
 .sub-cta {
   font-size: 1rem;
