@@ -34,13 +34,14 @@ p {
 
 .description-darker {
   color: rgba(22, 21, 21, 0.3); /* 80% opacity black */
-  font-weight: 500;
+  font-weight: 400;
 }
 
 .gradient-text {
   background: linear-gradient(to right, rgba(0, 0, 255, 0.72), rgb(0, 128, 255));
   -webkit-background-clip: text;
   color: transparent;
+  transform: scaleY(1.5);
 }
 
 .gradient-title {
@@ -114,13 +115,13 @@ p {
 }
 
 .responsive-text {
-  font-size: 3rem; /* Default size */
+  font-size: 2.5rem; /* Default size */
 }
 
 /* Media query for smaller screens */
 @media (max-width: 768px) {
   .responsive-text {
-    font-size: 3rem; /* Smaller size for mobile screens */
+    font-size: 2rem; /* Smaller size for mobile screens */
   }
 }
 
@@ -206,9 +207,20 @@ p {
 }
 
 .sub-cta {
-  font-size: 1.1rem;
+  font-size: 1rem;
 }
 
 .bg-full-gradient {
   background: linear-gradient(rgba(34, 0, 253, 0.314), rgba(221, 160, 221, 0.503));
+}
+
+.mobile-hidden {
+  display: none; /* Hidden by default for mobile */
+}
+
+/* Show line break on larger screens */
+@media (min-width: 768px) {
+  .mobile-hidden {
+    display: inline;
+  }
 }

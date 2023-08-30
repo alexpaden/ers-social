@@ -62,14 +62,16 @@ const Home = () => {
         <h1 className="font-bold gradient-text responsive-text z-20" style={{ lineHeight: 1.5 }}>
           Your Ξ reputation
         </h1>
-        <div className="sub-cta font-bold mb-8 description-darker">
+        <div className="sub-cta mb-8 description-darker z-20" style={{ paddingTop: 20 }}>
           Your identity across web3, a worldly perspective from any address,
-          <br />
+          <span className="mobile-hidden">
+            <br />
+          </span>
           and your decentralised score.
         </div>
 
-        <div className="relative w-full max-w-md" style={{ margin: 10 }}>
-          <div className="mt-1 relative rounded-md shadow-sm">
+        <div className="relative w-full max-w-md" style={{ paddingLeft: 15, paddingRight: 15 }}>
+          <div className="mt-1 relative shadow-sm">
             <input
               key={renderKey}
               type="text"
@@ -78,7 +80,7 @@ const Home = () => {
               value={value}
               onChange={handleChange}
               onKeyDown={handleKeyDown}
-              className="focus:ring-indigo-500 focus:border-indigo-500 block w-full pl-12 h-20 border-gray-300 rounded-md placeholder-darker"
+              className="focus:ring-indigo-500 focus:border-indigo-500 block w-full pl-12 h-20 border-gray-300 rounded-xl placeholder-darker"
               placeholder="Search for an address"
               style={{
                 backgroundColor: "white",

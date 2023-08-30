@@ -47,7 +47,7 @@ export const Header = () => {
           <img alt="SE2 logo" className="cursor-pointer" src="/logo.svg" style={{ width: 37 }} />
         </div>
         <div className="flex flex-col -ml-5">
-          <span className="font-bold leading-tight gradient-title">ERS</span>
+          <span className="font-bold leading-tight gradient-title">ΞRS</span>
         </div>
       </div>
 
