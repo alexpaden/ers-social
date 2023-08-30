@@ -199,7 +199,7 @@ p {
 }
 
 .pt-dynamic {
-  padding-top: 35%; /* Mobile */
+  padding-top: 45%; /* Mobile */
 }
 
 @media (min-width: 768px) {

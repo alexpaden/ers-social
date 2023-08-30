@@ -14,6 +14,9 @@ import { wagmiConfig } from "~~/services/web3/wagmiConfig";
 import { appChains } from "~~/services/web3/wagmiConnectors";
 import "~~/styles/globals.css";
 
+//<DiamondIcon className="absolute top-10 right-0 z-10" />
+//<HareIcon className="absolute left-0 bottom-0 z-10" />
+
 const ScaffoldEthApp = ({ Component, pageProps }: AppProps) => {
   return (
     <WagmiConfig config={wagmiConfig}>
@@ -24,8 +27,7 @@ const ScaffoldEthApp = ({ Component, pageProps }: AppProps) => {
             {/* Gradient background */}
             <Header />
             <main className="relative flex flex-col flex-1" style={{ paddingBottom: "0" }}>
-              <DiamondIcon className="absolute top-10 right-0 z-10" />
-              <HareIcon className="absolute left-0 bottom-0 z-10" />
+
               <Component {...pageProps} />
             </main>
           </div>
