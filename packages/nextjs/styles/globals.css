@@ -60,7 +60,7 @@ p {
 .connect-button-gradient {
   width: 150px;
   height: 50px;
-  background: blue;
+  background: linear-gradient(to right, rgba(0, 0, 255, 0.72), rgb(0, 128, 255));
   color: white;
   border: none;
   border-radius: 8px; /* Rounded corners */
@@ -71,13 +71,15 @@ p {
 .connected-button-gradient {
   display: flex;
   align-items: center;
-  background: rgb(98, 71, 221);
-  padding: 0.15rem 1rem; /* Mobile */
+  justify-content: space-between;
+  background: linear-gradient(to right, rgba(0, 0, 255, 0.72), rgb(0, 128, 255));
+  padding: 0.15rem 0.8rem; /* Adjusted right padding */
   border: none !important;
   box-shadow: none !important;
   outline: none !important;
   border-radius: 8px;
   opacity: 0.9;
+  width: 100%;
 }
 
 /* Media query for desktop */

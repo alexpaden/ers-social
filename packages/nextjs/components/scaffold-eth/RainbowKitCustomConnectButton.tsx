@@ -39,7 +39,7 @@ export const RainbowKitCustomConnectButton = () => {
                 <span>Wrong network</span>
                 <ChevronDownIcon className="h-6 w-4 ml-2 sm:ml-0" />
               </label>
-              <ul className="dropdown-content menu p-2 mt-1 shadow-center shadow-accent bg-base-200 rounded-box gap-1">
+              <ul className="dropdown-content menu">
                 <li>
                   <button
                     className="btn-sm !rounded-xl flex py-3 gap-3"
@@ -64,9 +64,9 @@ export const RainbowKitCustomConnectButton = () => {
         }
 
         return (
-          <div className={`connected-button-gradient px-2 flex justify-end items-center`}>
+          <div className={`px-2 flex justify-end items-center connected-button-gradient`}>
             <div className={`dropdown ${connected ? "dropdown-end" : ""} sm:bottom-0 md:top-0`}>
-              <label tabIndex={0} className="connected-button-gradient">
+              <label tabIndex={0} className="flex items-center justify-between w-full">
                 <BlockieAvatar address={account.address} size={24} ensImage={account.ensAvatar} />
                 <span className="ml-2 mr-1">{account.displayName}</span>
                 <ChevronDownIcon className="h-6 w-4 ml-2 sm:ml-0" />

@@ -52,7 +52,10 @@ export const Header = () => {
       </div>
 
       <div className="flex items-center gap-2">
-        <div className="hidden lg:flex absolute right-44 top-2" ref={burgerMenuRef}>
+        <div
+          className="connect-button-gradient lg:hidden fixed bottom-4 left-1/2 -translate-x-1/2 z-40"
+          ref={burgerMenuRef}
+        >
           <label
             tabIndex={0}
             className={`ml-1 btn btn-ghost ${isDrawerOpen ? "hover:bg-secondary" : "hover:bg-transparent"}`}
@@ -84,12 +87,12 @@ export const Header = () => {
         </div>
 
         {/* Button as-is for desktop */}
-        <div className="hidden lg:flex">
+        <div className="connect-button-gradient hidden lg:flex justify-end">
           <RainbowKitCustomConnectButton />
         </div>
 
         {/* Floating button for mobile */}
-        <div className="lg:hidden fixed bottom-4 left-1/2 transform -translate-x-1/2 z-40">
+        <div className="connect-button-gradient lg:hidden fixed bottom-4 left-1/2 -translate-x-1/2 z-40">
           <RainbowKitCustomConnectButton />
         </div>
 
