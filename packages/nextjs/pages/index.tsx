@@ -80,7 +80,7 @@ const Home = () => {
               value={value}
               onChange={handleChange}
               onKeyDown={handleKeyDown}
-              className="focus:ring-indigo-500 focus:border-indigo-500 block w-full h-20 border-gray-300 rounded-xl placeholder-darker"
+              className="focus:ring-indigo-500 focus:border-indigo-500 block w-full h-20 border-gray-300 rounded-xl placeholder-darker border"
               placeholder="Search Ethereum . . ."
               style={{
                 backgroundColor: "white",

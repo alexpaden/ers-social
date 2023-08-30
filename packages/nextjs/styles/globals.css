@@ -213,7 +213,7 @@ p {
 }
 
 .bg-full-gradient {
-  background: linear-gradient(rgba(34, 0, 253, 0.314), rgba(221, 160, 221, 0.503));
+  background: whitesmoke;
 }
 
 .mobile-hidden {
