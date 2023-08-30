@@ -59,7 +59,7 @@ const Home = () => {
       </MetaHeader>
 
       <main className="flex flex-col items-center justify-center w-full text-center pt-dynamic">
-        <h1 className="font-bold gradient-cta responsive-text z-20" style={{ lineHeight: 1.5 }}>
+        <h1 className="font-bold gradient-text responsive-text z-20" style={{ lineHeight: 1.5 }}>
           Your Ξ reputation
         </h1>
         <div className="sub-cta font-bold mb-8 description-darker">
