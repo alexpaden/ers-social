@@ -204,7 +204,13 @@ p {
 
 @media (min-width: 768px) {
   .pt-dynamic {
-    padding-top: 30%; /* Desktop */
+    padding-top: 25%; /* Desktop */
+  }
+}
+
+@media (min-width: 1400px) {
+  .pt-dynamic {
+    padding-top: 15%; /* Desktop */
   }
 }
 
