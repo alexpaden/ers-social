@@ -8,8 +8,8 @@ import { AddressProvider } from "~~/components/AddressContext";
 //import { Footer } from "~~/components/Footer";
 import { Header } from "~~/components/Header";
 import { BlockieAvatar } from "~~/components/scaffold-eth";
-import DiamondIcon from "~~/components/social-rep/assets/DiamondIcon";
-import HareIcon from "~~/components/social-rep/assets/HareIcon";
+//import DiamondIcon from "~~/components/social-rep/assets/DiamondIcon";
+//import HareIcon from "~~/components/social-rep/assets/HareIcon";
 import { wagmiConfig } from "~~/services/web3/wagmiConfig";
 import { appChains } from "~~/services/web3/wagmiConnectors";
 import "~~/styles/globals.css";
@@ -27,7 +27,6 @@ const ScaffoldEthApp = ({ Component, pageProps }: AppProps) => {
             {/* Gradient background */}
             <Header />
             <main className="relative flex flex-col flex-1" style={{ paddingBottom: "0" }}>
-
               <Component {...pageProps} />
             </main>
           </div>

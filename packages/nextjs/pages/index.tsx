@@ -59,11 +59,12 @@ const Home = () => {
       </MetaHeader>
 
       <main className="flex flex-col items-center justify-center w-full text-center pt-dynamic">
-        <h1 className="font-bold gradient-text responsive-text z-20" style={{ lineHeight: 1.5 }}>
+        <h1 className="font-bold gradient-text responsive-text z-20 " style={{ lineHeight: 1.5 }}>
           Your Ξ reputation
         </h1>
+
         <div className="sub-cta mb-8 description-darker z-20" style={{ paddingTop: 20 }}>
-          Your identity across web3, a worldly perspective from any address,
+          Your identity across web3, a worldly perspective of any address,&nbsp;
           <span className="mobile-hidden">
             <br />
           </span>

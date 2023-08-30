@@ -199,20 +199,37 @@ p {
 }
 
 .pt-dynamic {
-  padding-top: 45%; /* Mobile */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 75vh; /* Fills the full viewport height */
+}
+
+
+@media (max-height: 800px) and (orientation: landscape) {
+  .pt-dynamic {
+    height: 85vh;
+  }
+}
+
+@media (max-height: 500px) and (orientation: landscape) {
+  .pt-dynamic {
+    height: 60vh;
+  }
 }
 
 @media (min-width: 768px) {
   .pt-dynamic {
-    padding-top: 25%; /* Desktop */
+    padding-top: 0;
   }
 }
 
 @media (min-width: 1400px) {
   .pt-dynamic {
-    padding-top: 15%; /* Desktop */
+    padding-top: 0;
   }
 }
+
 
 .sub-cta {
   font-size: 1rem;
