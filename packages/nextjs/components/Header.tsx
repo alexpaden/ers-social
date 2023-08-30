@@ -52,7 +52,7 @@ export const Header = () => {
       </div>
 
       <div className="flex items-center gap-2">
-        <div className="hidden lg:flex absolute right-0 top-2" ref={burgerMenuRef}>
+        <div className="hidden lg:flex absolute right-48 top-2" ref={burgerMenuRef}>
           <label
             tabIndex={0}
             className={`ml-1 btn btn-ghost ${isDrawerOpen ? "hover:bg-secondary" : "hover:bg-transparent"}`}
